@@ -1,0 +1,108 @@
+////
+// Variables and Mixins for generating postion
+// @group Atoms/Layout
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+$position-opts: (
+  'default': 'relative',
+  'static': 'static',
+  'relative': 'relative',
+  'absolute': 'absolute',
+  'fixed': 'fixed'
+) !default;
+
+$coordinate-scale: (
+  0: 0,
+  1: rem(8),
+  2: rem(16),
+  3: rem(24),
+  4: rem(32),
+  5: rem(56),
+  6: rem(64),
+  7: rem(128),
+  8: rem(256),
+  '25%': '25%',
+  '33%': calc(100% / 3),
+  '50%': '50%'
+) !default;
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: position
+// @param {String} $postion - a key in $position-opts
+// @param {Map} $coordinates - a Map of keys in $coordinates-scale or specific values
+// @example `@include position('relative')`, `@include postion('absolute', (top: 1, right: '25%'))`
+// @returns a position declaration
+////
+@mixin position($position: 'default', $coordinates: ()) {
+  @if $position != 'static' and length(map-keys($coordinates)) > 0 {
+    @each $key in map-keys($coordinates) {
+      @if index(('top', 'right', 'bottom', 'left'), $key) {
+        $value: get($coordinates, $key);
+        // if a value was passed in, try using it as a key otherwise just return it
+        #{$key}: if(
+          map-has-key($coordinates-scale, $value),
+          get($coordinates-scale, $value),
+          $value
+        );
+      }
+    }
+    position: get($position-opts, $position, 'position mixin');
+  }
+}
+
+////
+// Mixin: top
+// @param {Number} $key - a key in $position-scale
+// @returns a top declaration
+////
+@mixin top($key: 'default') {
+  top: get($position-scale, $key, 'top mixin');
+}
+
+////
+// Mixin: right
+// @param {Number} $key - a key in $position-scale
+// @returns a right declaration
+////
+@mixin right($key: 'default') {
+  right: get($position-scale, $key, 'right mixin');
+}
+
+////
+// Mixin: bottom
+// @param {Number} $key - a key in $position-scale
+// @returns a bottom declaration
+////
+@mixin bottom($key: 'default') {
+  bottom: get($position-scale, $key, 'bottom mixin');
+}
+
+////
+// Mixin: left
+// @param {Number} $key - a key in $position-scale
+// @returns a left declaration
+////
+@mixin left($key: 'default') {
+  left: get($position-scale, $key, 'left mixin');
+}
+
+////
+// Mixin: absolute-fill
+// @returns a top, right, bottom, and left declarations
+// @credit https://github.com/tachyons-css/tachyons
+////
+@mixin absolute-fill($key: 'default') {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

@@ -1,0 +1,64 @@
+////
+// Variables and Mixin for generating float declarations
+// @group Atoms/Layout
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+$float-opts: (
+  'default': 'none',
+  'none': 'none',
+  'left': 'left',
+  'right': 'right'
+) !default;
+
+$clear-opts: (
+  'default': 'none',
+  'none': 'none',
+  'left': 'left',
+  'right': 'right',
+  'both': 'both'
+) !default;
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: flt
+// @param {String or Number} $key - a key in $float-opts
+// @param {String or Number} $clear - a key in $clear-opts (declaration is omitted if not set)
+// @returns a float declaration
+////
+@mixin flt($key: 'default', $clear: null) {
+  @if $clear {
+    clear: get($clear-opts, $key, 'clr mixin');
+  }
+  float: get($float-opts, $key, 'flt mixin');
+}
+
+////
+// Mixin: clr
+// @param {String or Number} $key - a key in $clear-opts
+// @returns a clear declaration
+////
+@mixin clr($key: 'none') {
+  clear: get($clear-opts, $key, 'clr mixin');
+}
+
+////
+// Mixin: clearfix - provides an easy way to include a clearfix for containing floats.
+////
+@mixin cf {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: ' ';
+  }
+  &:after {
+    clear: both;
+  }
+}

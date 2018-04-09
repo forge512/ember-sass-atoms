@@ -1,0 +1,61 @@
+////
+// Function: get - wrap map-get in a function that fails loudly when the key doesn't exist.
+// @access  public
+// @group   Libs
+// @param   {Map} $map - (Required) the map to select from
+// @param   {String} $key - (Required) the key in the map to return
+// @param   {String} $caller - (Optional) the name of the calling mixin/function
+// @example $someVar get($map, key, 'my-map')
+////
+@function get($map, $key, $caller: null) {
+  @if map-has-key($map, $key) {
+    @return map-get($map, $key);
+  } @else {
+    @error 'Unrecognized key `#{$key}` in `#{if($caller, $caller, $map)}`';
+    @return null;
+  }
+}
+
+////
+// Strips the unit from a number.
+// @param {Number (With Unit)} $value
+// @return {Number (Unitless)}
+////
+@function stripUnits($value) {
+  @return ($value / ($value * 0 + 1));
+}
+
+////
+// Convert pixels to ems
+// @param {Number} $pxVal - (Required) the desired value in pixels
+// @param {Number} $base - (Optional) the base value in pixels, defaults to $EM_BASE
+// @return {Number (in ems)}
+// @example em(12) => 0.75em (when $EM_BASE is 16px)
+// @example em(12, 24) => 0.5em
+////
+@function em($pxVal, $base: $EM_BASE) {
+  @if not unitless($pxVal) {
+    $pxVal: stripUnits($pxVal);
+  }
+  @if not unitless($base) {
+    $base: stripUnits($base);
+  }
+  @return ($pxVal / $base) * 1em;
+}
+
+////
+// Convert pixels to rems using $EM_BASE
+// @param {Number} $pxVal - (Required) the desired value in pixels
+// @example em(12) => 0.75rem (when $EM_BASE is 16px)
+// Assumes $em-base is the font-size of <html>
+////
+@function rem($pxVal) {
+  $base: $EM_BASE;
+  @if not unitless($pxVal) {
+    $pxVal: stripUnits($pxVal);
+  }
+  @if not unitless($base) {
+    $base: stripUnits($base);
+  }
+  @return ($pxVal / $base) * 1rem;
+}

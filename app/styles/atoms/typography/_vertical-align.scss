@@ -1,0 +1,28 @@
+////
+// Variables and Mixins for generating vertical-align declarations
+// @group Atoms/Typography
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+$vertical-align-opts: (
+  'default': 'middle',
+  'middle': 'middle',
+  'top': 'top',
+  'bottom': 'bottom' 'baseline': 'baseline'
+) !default;
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: ws
+// @param {String} $key - one of the keys in $vertical-align-opts
+// @returns a vertical-align declaration
+////
+@mixin va($key: 'default') {
+  vertical-align: get($vertical-align-opts, $key, 'va mixin');
+}

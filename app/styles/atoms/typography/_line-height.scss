@@ -1,0 +1,32 @@
+////
+// Variables and Mixins for generating line-height declarations
+// @group Atoms/Typography
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+$line-height-scale: (
+  'default': 1.25em,
+  1: 1em,
+  2: 1.0667em,
+  3: 1.1765em,
+  4: 1.25em,
+  5: 1.3333em,
+  6: 1.5em,
+  7: 1.75em
+) !default;
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: lh
+// @param {String} $key - one of the keys in $line-height-scale
+// @returns a line-height declaration
+////
+@mixin lh($key: 'default') {
+  line-height: get($line-height-scale, $key, 'lh mixin');
+}

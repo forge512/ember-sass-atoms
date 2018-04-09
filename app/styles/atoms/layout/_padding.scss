@@ -1,0 +1,115 @@
+////
+// Variables and Mixins for generating padding
+// @group Atoms/Layout
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+$padding-scale: (
+  'auto': auto,
+  0: 0,
+  1: rem(2),
+  2: rem(4),
+  3: rem(8),
+  4: rem(16),
+  5: rem(24),
+  6: rem(32),
+  7: rem(56),
+  8: rem(64),
+  9: rem(128)
+) !default;
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: pa - sets paddings for all directions
+// @param {List or Number} $keys - one or more keys in $padding-scale
+// @examples `@include pa((1,2,2,1))`, `@include pa(1)`
+// @returns a padding declaration
+////
+@mixin pa($keys: 0) {
+  @if type-of($keys) == list {
+    // if $keys is a list...
+    $values: ();
+    @each $key in $keys {
+      $value: get($padding-scale, $key, 'pa mixin');
+      $values: append($values, $value);
+    }
+    padding: $values;
+  } @else {
+    // if $keys is anything else...
+    padding: get($padding-scale, $keys, 'pa mixin');
+  }
+}
+
+////
+// Mixin: pv - sets paddings for vertical directions
+// @param {Number} $top - a key in $padding-scale (defaults to 0)
+// @param {Number} $bottom - a key in $padding-scale (defaults to value of $top)
+// @examples `@include pv(1,2)`, `@include pv(1)`
+// @returns padding-top and padding-bottom declarations
+////
+@mixin pv($top: 0, $bottom: null) {
+  padding-top: get($padding-scale, $top, 'pv mixin');
+  padding-bottom: if(
+    $bottom,
+    get($padding-scale, $bottom, 'pv mixin'),
+    get($padding-scale, $top, 'pv mixin')
+  );
+}
+
+////
+// Mixin: ph - sets paddings for horizontal directions
+// @param {Number} $left - a key in $padding-scale (defaults to 0)
+// @param {Number} $right - a key in $padding-scale (defaults to value of $left)
+// @examples `@include ph(1,2)`, `@include ph(1)`
+// @returns padding-left and padding-right declarations
+////
+@mixin ph($left: 0, $right: null) {
+  padding-right: if(
+    $right,
+    get($padding-scale, $right, 'pv mixin'),
+    get($padding-scale, $left, 'pv mixin')
+  );
+  padding-left: get($padding-scale, $left, 'pv mixin');
+}
+
+////
+// Mixin: pt - sets top padding
+// @param {Number} $key - a key in $padding-scale (defaults to 0)
+// @returns a padding-top declaration
+////
+@mixin pt($key: 0) {
+  padding-top: get($padding-scale, $key, 'pt mixin');
+}
+
+////
+// Mixin: pr - sets right padding
+// @param {Number} $key - a key in $padding-scale (defaults to 0)
+// @returns a padding-right declaration
+////
+@mixin pr($key: 0) {
+  padding-right: get($padding-scale, $key, 'pr mixin');
+}
+
+////
+// Mixin: pb - sets bottom padding
+// @param {Number} $key - a key in $padding-scale (defaults to 0)
+// @returns a padding-bottom declaration
+////
+@mixin pb($key: 0) {
+  padding-bottom: get($padding-scale, $key, 'pb mixin');
+}
+
+////
+// Mixin: pl - sets left padding
+// @param {Number} $key - a key in $padding-scale (defaults to 0)
+// @returns a padding-left declaration
+////
+@mixin pl($key: 0) {
+  padding-left: get($padding-scale, $key, 'pl mixin');
+}

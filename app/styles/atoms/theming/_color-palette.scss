@@ -1,0 +1,84 @@
+////
+// Color Palettes
+// @group Atoms/Theming
+////
+
+////
+// $color-palettes - Map of color palettes
+// @example Define and add a color palette to $color-palettes
+// $my-palette: (
+//  'default': #d0d0d0,
+//  'color-name-1': #333333,
+//  'color-name-2': color('red', 'lighten-1'),
+//  'gradient-name-1': linear-gradient(130deg, yellow, red)
+// )
+// $color-palettes: map-merge($color-palettes, (my-palette: $my-palette));
+// color values in $my-palette can now be accessed by calling:
+// `color('my-palette', 'color-name-1')` or `color('my-palette')` (retrieves the 'default' color)
+////
+$color-palettes: () !default;
+
+////
+// Setup a theme by selecting color palettes and then referencing them by name
+// @example color($primary, 'lighten-1');
+////
+$primary: '' !default;
+$accent: '' !default;
+$error: '' !default;
+$text: '' !default;
+
+// ============================================================================
+// Functions
+// ============================================================================
+
+@function resolve-palette($palette) {
+  $resolved-palette: null;
+  @if type-of($palette) == 'string' and map-has-key($color-palettes, $palette) {
+    // if palette is a string look it up in $color-palettes
+    $resolved-palette: map-get($color-palettes, $palette);
+  } @else if type-of($palette) == 'map' {
+    // if palette is a map just use it
+    $resolved-palette: $palette;
+  } @else {
+    @error 'Invalid pallete `#{$pallete}`; must be a map or the name of a palette in $color-palettes';
+    @return null;
+  }
+  @return $resolved-palette;
+}
+
+@function resolve-shade($pallete, $shade) {
+  $resolved-shade: null;
+  // if no shade was provided
+  @if ($shade == null) {
+    @if map-has-key($palette, 'default') {
+      // if there is a 'default' key use it
+      $resolved-shade: 'default';
+    } @else if $default-material-shade != null and map-has-key($palette, $default-material-shade) {
+      // if $default-material-shade is found use it
+      $resolved-shade: $default-material-shade;
+    }
+  } @else {
+    // check that the shade exists in $palette
+    @if map-has-key($palette, $shade) {
+      $resolved-shade: $shade;
+    }
+  }
+  @if ($resolved-shade == null) {
+    @error 'Unrecognized shade `#{$shade}` for palette `#{$palette}`';
+    @return null;
+  }
+  @return $resolved-shade;
+}
+
+// Function: color
+// @param {String | Map} $palette - a palette in $color-palettes or a map
+// @param {String} $shade - name of the palette shade (uses default if none is given)
+// @returns - a color value from the palette
+@function color($palette, $shade: null) {
+  // resolve the palette and shade params
+  $resolved-palette: resolve-palette($palette);
+  $resolved-shade: resolve-shade($resolved-palette, $shade);
+
+  // retrieve the shade from the selected palette
+  @return map-get($resolved-palette, $resolved-shade);
+}

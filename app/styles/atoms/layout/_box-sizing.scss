@@ -1,0 +1,59 @@
+////
+// Mixins for generating box-model declarations
+// @group Atoms/Layout
+////
+
+////
+// Mixin: box-model - sets the box-sizing on an element
+// @param {String} $type - either `border-box` or 'content-box'
+////
+@mixin box-model($type) {
+  // prettier-ignore
+  @if index(('border-box', 'content-box'), $type) {
+    box-sizing: $type;
+    &:before, &:after {
+      box-sizing: inherit;
+    }
+  } @else {
+    @error 'Unrecognized box-sizing #{$type} passed to mixin box-model';
+  }
+}
+
+////
+// Mixin: fix-box-model - set the box model for all HTML elements to `border-box`
+////
+@mixin fix-box-model {
+  // prettier-ignore
+  html {
+    box-sizing: border-box;
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+  }
+}
+
+////
+// Mixin: fix-box-model-scoped - set the box model for a scoped set of HTML elements to `border-box`
+////
+@mixin fix-box-model-scoped {
+  // prettier-ignore
+  html, body,
+  div, article, section, main, footer, header,
+  pre, code,
+  h1,h2,h3,h4,h5,h6,
+  a, p,
+  ul, ol, li, dl, dt, dd,
+  table, td, th, tr,
+  form, fieldset, legend, textarea,
+  input[type="email"],
+  input[type="number"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="url"] {
+    box-sizing: border-box;
+    &:before, &:after {
+      box-sizing: inherit;
+    }
+  }
+}

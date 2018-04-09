@@ -1,0 +1,31 @@
+////
+// Variables and Mixins for generating letter-spacing declarations
+// @group Atoms/Typography
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+$kerning-scale: (
+  'default': 'normal',
+  1: -0.01em,
+  2: -0.005em,
+  3: 'normal',
+  4: 0.005em,
+  5: 0.01em,
+  6: 0.02em
+) !default;
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: kerning
+// @param {String} $key - one of the keys in $kerning-scale
+// @returns a letter-spacing declaration
+////
+@mixin kerning($key: 'default') {
+  letter-spacing: get($kerning-scale, $key, 'kerning mixin');
+}

@@ -1,0 +1,36 @@
+////
+// Variables and Mixins for generating font-weight declarations
+// @group Atoms/Typography
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+$font-weight-scale: (
+  'default': 'normal',
+  'normal': 'normal',
+  'bold': 'bold',
+  1: 100,
+  2: 200,
+  3: 300,
+  4: 400,
+  5: 500,
+  6: 600,
+  7: 700,
+  8: 800,
+  9: 900
+) !default;
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: fw
+// @param {String} $key - one of the keys in $font-weight-scale
+// @returns a font-weight declaration
+////
+@mixin fw($key: 'default') {
+  font-weight: get($font-weight-scale, $key, 'fw mixin');
+}

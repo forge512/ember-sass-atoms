@@ -1,0 +1,36 @@
+////
+// Variables and Mixins for generating font-family declarations
+// @group Atoms/Typography
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+$DEFAUlT_FAMILIES: (
+  'serif': (georgia, times, 'times new roman', serif),
+  'sans-serif': ('helvetica neue', helvetica, ubuntu, roboto, arial, sans-serif),
+  'monospace': (Consolas, monaco, monospace),
+  'courier': ('Courier Next', courier, monospace),
+  'helvetica': ('helvetica neue', helvetica, sans-serif),
+  'roboto': ('Roboto', sans-serif),
+  'georgia': (georgia, serif),
+  'times': (times, 'times new roman', serif)
+);
+
+$font-family-sets: map-merge(
+  ('default': ('helvetica neue', helvetica, ubuntu, roboto, arial, sans-serif)),
+  $DEFAUlT_FAMILIES
+) !default;
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: ff (font-family)
+// @param {String} $key - one of the keys in $font-family-sets
+// @returns a font-family declaration
+////
+@mixin ff($key: 'default') {
+  font-family: get($font-family-sets, $key, 'ff mixin');
+}

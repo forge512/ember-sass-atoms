@@ -1,0 +1,72 @@
+////
+// Variables and Mixins for
+// @group Atoms/Theming
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+$background-position-opts: (
+  'top-left': (top left),
+  'top-center': (top center),
+  'top-right': (top right),
+  'center-left': (center left),
+  'center': (center center),
+  'center-right': (center right),
+  'bottom-left': (bottom left),
+  'bottom-center': (bottom center),
+  'bottom-right': (bottom right)
+) !default;
+
+$background-size-opts: (
+  'contain': 'contain',
+  'cover': 'cover'
+) !default;
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: bg
+// @param {String | Map} $palette - a palette in $color-palettes or a map
+// @param {String} $shade - name of the palette shade (uses default if none is given)
+// @returns a background-color declaration
+////
+@mixin bg($palette, $shade) {
+  background-color: color($palette, $shade);
+}
+
+////
+// Mixin: bg
+// @param {String} $img - url to the image or encode image
+// @param {String} $pos - a key in the $background-position-opts
+// @param {String} $size - a key in the $background-size-opts
+// @param {Boolean} $repeat - should the image repeat
+// @returns background declarations for image, repeat, position, and size
+////
+@mixin bg-img($img: '', $pos: 'top-left', $size: 'cover', $repeat: false) {
+  background-image: url($img);
+  background-repeat: if($repeat, 'repeat', 'no-repeat');
+  background-position: get($background-position-opts, $pos, 'bg-img mixin');
+  background-size: get($background-size-opts, $size, 'bg-img mixin');
+}
+
+////
+// Mixin: bg-pos
+// @param {String} $key - a $key in $background-position-opts
+// @returns a background-position declaration
+////
+@mixin bg-pos($key) {
+  background-position: get($background-position-opts, $key, 'bg-pos mixin');
+}
+
+////
+// Mixin: bg-pos
+// @param {String} $key - a $key in $background-size-opts
+// @returns a background-size declaration
+////
+@mixin bg-size($key) {
+  background-size: get($background-size-opts, $key, 'bg-size mixin');
+}

@@ -1,0 +1,224 @@
+////
+// Variables and Mixins for
+// @group Atoms/Theming
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+$border-width-scale: (
+  0: 0,
+  1: rem(1),
+  2: rem(2),
+  3: rem(4),
+  4: rem(8),
+  5: rem(16)
+) !default;
+
+$border-radius-scale: (
+  0: 0,
+  1: rem(2),
+  2: rem(4),
+  3: rem(8),
+  4: rem(16),
+  100: 100%
+) !default;
+
+$border-style-opts: (
+  'solid': solid,
+  'dottend': dotted,
+  'dashed': dashed
+) !default;
+
+$border-color-opts: (
+  'transparent': transparent,
+  'black-1': rgba(0, 0, 0, 0.05),
+  'black-2': rgba(0, 0, 0, 0.12),
+  'black-3': rgba(0, 0, 0, 0.54),
+  'black-4': rgba(0, 0, 0, 0.87),
+  'white-1': rgba(255, 255, 255, 0.05),
+  'white-2': rgba(255, 255, 255, 0.12),
+  'white-3': rgba(255, 255, 255, 0.54),
+  'white-4': rgba(255, 255, 255, 0.87),
+  'red-1': rgba(255, 0, 0, 0.05),
+  'red-2': rgba(255, 0, 0, 0.12),
+  'red-3': rgba(255, 0, 0, 0.54),
+  'red-4': rgba(255, 0, 0, 0.87),
+  'green-1': rgba(0, 128, 0, 0.05),
+  'green-2': rgba(0, 128, 0, 0.12),
+  'green-3': rgba(0, 128, 0, 0.54),
+  'green-4': rgba(0, 128, 0, 0.87)
+) !default;
+
+$border-sets: (
+  'transparent': 1px solid transparent,
+  'black': 1px solid get($border-color-opts, 'black-2'),
+  'white': 1px solid get($border-color-opts, 'white-2'),
+  'error': 1px solid get($border-color-opts, 'red-4'),
+  'success': 1px solid get($border-color-opts, 'green-4')
+) !default;
+
+// ============================================================================
+// Functions
+// ============================================================================
+
+////
+// Function: resolve-keys
+// @param {String} $keys - list of keys to the width, style, and color maps
+// @returns - a list of the resolved values
+////
+@function resolve-keys($keys) {
+  $values: ();
+  $values: append($values, get($border-width-scale, nth($keys, 1), 'ba mixin'));
+  $values: append($values, get($border-style-opts, nth($keys, 2), 'ba mixin'));
+  $values: append($values, get($border-color-opts, nth($keys, 3), 'ba mixin'));
+  @return $resolved-values;
+}
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: ba - define a border on all sides of an element
+// @param {String or List} - a key in $border-sets or a list of keys ($width, $style, $color)
+// @returns a border declaration
+// @examples `@include ba((1 'solid' 'black-1'))`, `@include ba('black')`
+////
+@mixin ba($keys: 'black') {
+  @if type-of($keys) == list {
+    // if $keys is a list...
+    $values: resolve-keys($keys);
+    border: $values;
+  } @else {
+    // if $keys is anything else...
+    border: get($border-sets, $keys, 'ba mixin');
+  }
+}
+
+////
+// Mixin: bt - define a top border on an element
+// @param {String or List} - a key in $border-sets or a list of keys ($width, $style, $color)
+// @returns a border-top declaration
+// @examples `@include bt((1 'solid' 'black-1'))`, `@include bt('black')`
+////
+@mixin bt($keys: 'black') {
+  @if type-of($keys) == list {
+    // if $keys is a list...
+    $values: resolve-keys($keys);
+    border-top: $values;
+  } @else {
+    // if $keys is anything else...
+    border-top: get($border-sets, $keys, 'bt mixin');
+  }
+}
+
+////
+// Mixin: br - define a right border on an element
+// @param {String or List} - a key in $border-sets or a list of keys ($width, $style, $color)
+// @returns a border-right declaration
+// @examples `@include br((1 'solid' 'black-1'))`, `@include br('black')`
+////
+@mixin br($keys: 'black') {
+  @if type-of($keys) == list {
+    // if $keys is a list...
+    $values: resolve-keys($keys);
+    border-right: $values;
+  } @else {
+    // if $keys is anything else...
+    border-right: get($border-sets, $keys, 'br mixin');
+  }
+}
+
+////
+// Mixin: bb - define a bottom border on an element
+// @param {String or List} - a key in $border-sets or a list of keys ($width, $style, $color)
+// @returns a border-bottom declaration
+// @examples `@include bb((1 'solid' 'black-1'))`, `@include bb('black')`
+////
+@mixin bb($keys: 'black') {
+  @if type-of($keys) == list {
+    // if $keys is a list...
+    $values: resolve-keys($keys);
+    border-bottom: $values;
+  } @else {
+    // if $keys is anything else...
+    border-bottom: get($border-sets, $keys, 'bb mixin');
+  }
+}
+
+////
+// Mixin: bl - define a left border on an element
+// @param {String or List} - a key in $border-sets or a list of keys ($width, $style, $color)
+// @returns a border-left declaration
+// @examples `@include bl((1 'solid' 'black-1'))`, `@include bl('black')`
+////
+@mixin bl($keys: 'black') {
+  @if type-of($keys) == list {
+    // if $keys is a list...
+    $values: resolve-keys($keys);
+    border-left: $values;
+  } @else {
+    // if $keys is anything else...
+    border-left: get($border-sets, $keys, 'bl mixin');
+  }
+}
+
+////
+// Mixin: ba-radius
+// @param {Number} $key - a key in $border-radius-scale (defaults to 0)
+// @returns a border-radius declaration
+////
+@mixin ba-radius($key: 0) {
+  border-radius: get($border-radius-scale, $key, 'ba-radius mixin');
+}
+
+////
+// Mixin: bt-radius
+// @param {Number} $key - a key in $border-radius-scale (defaults to 0)
+// @returns a border-top-left-radius, border-top-right-radius declarations
+////
+@mixin bt-radius($key: 0) {
+  border-top-left-radius: get($border-radius-scale, $key, 'bt-radius mixin');
+  border-top-right-radius: get($border-radius-scale, $key, 'bt-radius mixin');
+}
+
+////
+// Mixin: br-radius
+// @param {Number} $key - a key in $border-radius-scale (defaults to 0)
+// @returns a border-top-right-radius, border-bottom-right-radius declarations
+////
+@mixin br-radius($key: 0) {
+  border-top-right-radius: get($border-radius-scale, $key, 'br-radius mixin');
+  border-bottom-right-radius: get($border-radius-scale, $key, 'br-radius mixin');
+}
+
+////
+// Mixin: bb-radius
+// @param {Number} $key - a key in $border-radius-scale (defaults to 0)
+// @returns a border-bottom-left-radius, border-bottom-right-radius declarations
+////
+@mixin bb-radius($key: 0) {
+  border-bottom-right-radius: get($border-radius-scale, $key, 'bb-radius mixin');
+  border-bottom-left-radius: get($border-radius-scale, $key, 'bb-radius mixin');
+}
+
+////
+// Mixin: bl-radius
+// @param {Number} $key - a key in $border-radius-scale (defaults to 0)
+// @returns a border-top-left-radius, border-bottom-left-radius declarations
+////
+@mixin bl-radius($key: 0) {
+  border-top-left-radius: get($border-radius-scale, $key, 'bl-radius mixin');
+  border-bottom-left-radius: get($border-radius-scale, $key, 'bl-radius mixin');
+}
+
+////
+// Mixin: ba-color
+// @param {Number} $key - a key in $border-color-opts (defaults to 'black-2')
+// @returns a border-color declaration
+////
+@mixin ba-color($key: 'black-2') {
+  border-color: get($border-color-opts, $key, 'b-color mixin');
+}

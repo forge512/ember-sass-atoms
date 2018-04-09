@@ -1,0 +1,34 @@
+////
+// Variables and Mixins for generating font-size declarations
+// @group Atoms/Typography
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+$font-size-scale: (
+  'default': rem(14),
+  1: rem(10),
+  2: rem(12),
+  3: rem(14),
+  4: rem(16),
+  5: rem(20),
+  6: rem(24),
+  7: rem(34),
+  8: rem(45),
+  9: rem(56),
+  10: rem(112)
+) !default;
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: fsz (font-size)
+// @param {String} $key - one of the keys in $font-size-scale
+// @returns a font-size declaration
+////
+@mixin fsz($key: 'default') {
+  font-size: get($font-size-scale, $key, 'fsz mixin');
+}

@@ -1,0 +1,27 @@
+////
+// Variables and Mixins for generating text-decoration declarations
+// @group Atoms/Typography
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+$text-decoration-opts: (
+  'default': 'none',
+  'underline': 'underline',
+  'strike': 'line-through'
+) !default;
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: td
+// @param {String} $key - one of the keys in $text-decoration-opts
+// @returns a text-decoration declaration
+////
+@mixin td($key: 'default') {
+  text-decoration: get($text-decoration-opts, $key, 'td mixin');
+}

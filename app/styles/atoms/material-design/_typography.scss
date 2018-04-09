@@ -1,0 +1,126 @@
+////
+// Variables and Mixin for generating text per the Material Design Spec
+// @link https://material.io/guidelines/style/typography.html
+// @group Atoms/MaterialDesign
+////
+
+// Material Design text contrast options
+$text-default: get($DARK_CONTRAST, 'base') !default;
+$text-light: get($DARK_CONTRAST, 'lighten-1') !default;
+
+// Sass map of the Material Design typography styles
+$MATERIAL_TYPOGRAPHY_STYLES: (
+  'display4':
+    (
+      'color': $text-light,
+      'size': rem(112),
+      'weight': 300,
+      'lineHeight': 1.0667em,
+      'kerning': -0.01em
+    ),
+  'display3':
+    (
+      'color': $text-light,
+      'size': rem(56),
+      'weight': 400,
+      'lineHeight': 1.0667em,
+      'kerning': -0.005em
+    ),
+  'display2':
+    (
+      'color': $text-light,
+      'size': rem(45),
+      'weight': 400,
+      'lineHeight': 1.0667em,
+      'kerning': 'normal'
+    ),
+  'display1':
+    (
+      'color': $text-light,
+      'size': rem(34),
+      'weight': 400,
+      'lineHeight': 1.1765em,
+      'kerning': 'normal'
+    ),
+  'headline':
+    (
+      'color': $text-default,
+      'size': rem(24),
+      'weight': 400,
+      'lineHeight': 1.3333em,
+      'kerning': 'normal'
+    ),
+  'title':
+    (
+      'color': $text-default,
+      'size': rem(20),
+      'weight': 500,
+      'lineHeight': 1.25em,
+      'kerning': 0.005em
+    ),
+  'subheading':
+    (
+      'color': $text-default,
+      'size': rem(16),
+      'weight': 400,
+      'lineHeight': 1.75em,
+      'kerning': 0.01em
+    ),
+  'body2':
+    (
+      'color': $text-default,
+      'size': rem(14),
+      'weight': 500,
+      'lineHeight': 1.75em,
+      'kerning': 0.01em
+    ),
+  'body1':
+    (
+      'color': $text-default,
+      'size': rem(14),
+      'weight': 400,
+      'lineHeight': 1.5em,
+      'kerning': 0.01em
+    ),
+  'caption':
+    (
+      'color': $text-light,
+      'size': rem(12),
+      'weight': 400,
+      'lineHeight': 1em,
+      'kerning': 0.02em
+    ),
+  'button':
+    (
+      'color': $text-default,
+      'size': rem(14),
+      'weight': 500,
+      'lineHeight': 1em,
+      'kerning': 0.01em
+    )
+);
+
+// =================================================================================================
+// Mixins
+// =================================================================================================
+
+////
+// Mixin: mdText. Returns the styles for a specific
+// @param {String} $style - the style name (e.g. body1, display4, etc.)
+// @param {String} $color - color value (defaults to the recommended color from the spec)
+// @param {String} $fontFamily - font-family to use (if you need something other than the default)
+////
+@mixin mdText($style, $color: null, $fontFamily: null) {
+  $mdStyle: get($MATERIAL_TYPOGRAPHY_STYLES, $style, 'mdText mixin');
+  @if $fontFamily {
+    font-family: $fontFamily;
+  }
+  @if $style == 'button' {
+    text-transform: uppercase;
+  }
+  color: if($color, $color, get($mdStyle, 'color'));
+  font-size: get($mdStyle, 'size');
+  font-weight: get($mdStyle, 'weight');
+  line-height: get($mdStyle, 'lineHeight');
+  letter-spacing: get($mdStyle, 'kerning');
+}

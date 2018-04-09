@@ -1,0 +1,115 @@
+////
+// Variables and Mixins for generating margins
+// @group Atoms/Layout
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+$margin-scale: (
+  'auto': auto,
+  0: 0,
+  1: rem(2),
+  2: rem(4),
+  3: rem(8),
+  4: rem(16),
+  5: rem(24),
+  6: rem(32),
+  7: rem(56),
+  8: rem(64),
+  9: rem(128)
+) !default;
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: ma - sets margin for all directions
+// @param {List or Number} $keys - one or more keys in $margin-scale
+// @examples `@include ma((1,2,2,1))`, `@include ma(1)`
+// @returns a margin declaration
+////
+@mixin ma($keys: 0) {
+  @if type-of($keys) == list {
+    // if $keys is a list...
+    $values: ();
+    @each $key in $keys {
+      $value: get($margin-scale, $key, 'pa mixin');
+      $values: append($values, $value);
+    }
+    margin: $values;
+  } @else {
+    // if $keys is a anything else...
+    margin: get($margin-scale, $keys, 'pa mixin');
+  }
+}
+
+////
+// Mixin: mv - sets margins for vertical directions
+// @param {Number} $top - a key in $margin-scale (defaults to 0)
+// @param {Number} $bottom - a key in $margin-scale (defaults to value of $top)
+// @examples `@include mv(1,2)`, `@include mv(1)`
+// @returns margin-top and margin-bottom declarations
+////
+@mixin mv($top: 0, $bottom: null) {
+  margin-top: get($margin-scale, $top, 'pv mixin');
+  margin-bottom: if(
+    $bottom,
+    get($margin-scale, $bottom, 'pv mixin'),
+    get($margin-scale, $top, 'pv mixin')
+  );
+}
+
+////
+// Mixin: mh - sets margins for horizontal directions
+// @param {Number} $left - a key in $margin-scale (defaults to 0)
+// @param {Number} $right - a key in $margin-scale (defaults to value of $left)
+// @examples `@include mh(1,2)`, `@include mh(1)`
+// @returns margin-left and margin-right declarations
+////
+@mixin mh($left: 0, $right: null) {
+  margin-right: if(
+    $right,
+    get($margin-scale, $right, 'pv mixin'),
+    get($margin-scale, $left, 'pv mixin')
+  );
+  margin-left: get($margin-scale, $left, 'pv mixin');
+}
+
+////
+// Mixin: mt - sets top margin
+// @param {Number} $key - a key in $margin-scale (defaults to 0)
+// @returns a margin-top declaration
+////
+@mixin mt($key: 0) {
+  margin-top: get($margin-scale, $key, 'mt mixin');
+}
+
+////
+// Mixin: mr - sets right margin
+// @param {Number} $key - a key in $margin-scale (defaults to 0)
+// @returns a margin-right declaration
+////
+@mixin mr($key: 0) {
+  margin-right: get($margin-scale, $key, 'mr mixin');
+}
+
+////
+// Mixin: mb - sets bottom margin
+// @param {Number} $key - a key in $margin-scale (defaults to 0)
+// @returns a margin-bottom declaration
+////
+@mixin mb($key: 0) {
+  margin-bottom: get($margin-scale, $key, 'mb mixin');
+}
+
+////
+// Mixin: ml - sets left margin
+// @param {Number} $key - a key in $margin-scale (defaults to 0)
+// @returns a margin-left declaration
+////
+@mixin ml($key: 0) {
+  margin-left: get($margin-scale, $key, 'ml mixin');
+}

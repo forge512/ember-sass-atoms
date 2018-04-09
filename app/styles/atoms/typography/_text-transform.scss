@@ -1,0 +1,28 @@
+////
+// Variables and Mixins for generating text-transform declarations
+// @group Atoms/Typography
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+$text-transform-opts: (
+  'default': 'none',
+  'upper': 'uppercase',
+  'lower': 'lowercase',
+  'capital': 'capitalize'
+) !default;
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: tt
+// @param {String} $key - one of the keys in $text-transform-opts
+// @returns a text-transform declaration
+////
+@mixin tt($key: 'default') {
+  text-transform: get($text-transform-opts, $key, 'tt mixin');
+}

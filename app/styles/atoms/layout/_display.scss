@@ -1,0 +1,46 @@
+////
+// Variables and Mixin for generating display declarations
+// @group Atoms/Layout
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+$display-opts: (
+  'default': 'initial',
+  'none': 'none',
+  'inline': 'inline',
+  'block': 'block',
+  'inline-block': 'inline-block',
+  'inline-table': 'inline-table',
+  'table': 'table',
+  'table-cell': 'table-cell',
+  'table-row': 'table-row',
+  'table-row-group': 'table-row-group',
+  'table-column': 'table-column',
+  'table-column-group': 'table-column-group'
+) !default;
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: dpl
+// @param {String or Number} $key - a key in $display-opts
+// @returns a display declaration
+////
+@mixin dpl($key: 'default') {
+  display: get($display-opts, $key, 'dpl mixin');
+}
+
+////
+// Mixin: dpl-tbl-fixed - sets table to full width and so that all cells are equal width
+// @param {String or Number} $key - a key in $display-opts
+// @returns a display declaration
+////
+@mixin dpl-tbl-fixed($key: 'default') {
+  width: 100%;
+  table-layout: fixed;
+}

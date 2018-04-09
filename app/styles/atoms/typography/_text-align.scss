@@ -1,0 +1,29 @@
+////
+// Variables and Mixins for generating text-align declarations
+// @group Atoms/Typography
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+$text-align-opts: (
+  'default': 'left',
+  'left': 'left',
+  'right': 'right',
+  'center': 'center',
+  'justify': 'justify'
+) !default;
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: ta
+// @param {String} $key - one of the keys in $text-align-opts
+// @returns a line-height declaration
+////
+@mixin ta($key: 'default') {
+  text-align: get($text-align-opts, $key, 'ta mixin');
+}
