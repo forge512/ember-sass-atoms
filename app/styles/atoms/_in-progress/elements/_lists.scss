@@ -1,0 +1,38 @@
+////
+// Variables and Mixins for
+// @group Atoms/Elements
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin:
+// @param
+// @returns
+////
+
+//
+// @mixin listReset {
+//   @include boxModelReset;
+//   list-style: none;
+// }
+// @mixin listInline {
+//   @include listReset;
+//   & > li {
+//     display: inline-block;
+//   }
+// }
+// @mixin listDefault {
+//   @include boxModelReset;
+//   & > li {
+//     padding-left: pa('none');
+//     margin-left: ma(4);
+//     list-style-type: disc !important; // stylelint-disable-line declaration-no-important
+//   }
+// }

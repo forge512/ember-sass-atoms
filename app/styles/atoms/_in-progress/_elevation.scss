@@ -1,0 +1,295 @@
+////
+// Mixin & Functions for generating box shadows per the Material Design Spec
+// @credit https://github.com/prestopasto/SCSS-Material-Shadows
+// @group Atoms/Theming
+// @note The referenced project requires bower so we just copied the one file we needed
+//
+// Box Shadow values from Material Shadow Interpolator found here:
+// http://codepen.io/shyndman/pen/ojxmdY?editors=001
+//
+// Inspired by Angular Material 2 notes here:
+// https://docs.google.com/document/d/1W3NGSLqDZzjbBBLW2C6y_6NUxtvdZAVaJvg58LY3Q0E/preview#
+//
+// References
+// [Material Design - Elevation and Shadows](https://material.google.com/material-design/elevation-shadows.html)
+// [Material Shadow Interpolator](http://codepen.io/shyndman/pen/ojxmdY)
+//
+// The primary mixin is `mdElevation()`. It accepts 3 parameters, $elevation1, $elevation2, and a
+// $states list to change from one to the other. $elevation2 and $state are optional, but must be
+// used together.
+//
+// ##### Static Elements
+// ```SCSS
+// .my-panel {
+//   @include mdElevation(2);
+// }
+// ```
+//
+// ##### Elements That Change Elevation
+// You can use selectors to change the elevation of an element. When an element changes elevation
+// use the `mdElevationTransition($deltaElevation)` mixin to animate the change. Pass in the change
+// in elevation and `mdElevationTransition($deltaElevation)` will change the animation duration.
+// Smaller changes are quicker than longer changes.
+// ```SCSS
+// .my-card {
+//   @include mdElevation(2);
+//   @include mdElevationTransition(6);
+//   &:hover, &:focus, &:active {
+//     @include mdElevation(8);
+//   }
+// }
+// ```
+// The following code will produce the same output as the precedding code.
+// ```SCSS
+// .my-card {
+//   @include mdElevation(2, 8, ('hover', 'focus', 'active'));
+// }
+// ```
+//
+// #### Predefined Material Components
+// There are also predifined elevation values for all the Material components found in
+// https://material.google.com/material-design/elevation-shadows.html). To use one of these
+// predefined components use the `mdElevationComponent` mixin:
+// ```SCSS
+// .my-card {
+//   @include mdElevationComponent('card');
+// }
+// ```
+////
+
+// Shadow colors
+// @credit http://codepen.io/shyndman/pen/ojxmdY
+$KEY_UMBRA: rgba(0, 0, 0, 0.2);
+$KEY_PENUMBRA: rgba(0, 0, 0, 0.14);
+$AMBIENT: rgba(0, 0, 0, 0.12);
+
+// Animation durations
+$MIN_ANIMATION_LENGTH: 250ms;
+$MAX_ANIMATION_LENGTH: 400ms;
+
+// Reference shadows
+// @credit http://codepen.io/shyndman/pen/ojxmdY
+$REFERENCE_SHADOWS: (
+  (
+    elevation: 0,
+    shadows: ((0, 0, 0, 0, $KEY_UMBRA), (0, 0, 0, 0, $KEY_PENUMBRA), (0, 0, 0, 0, $AMBIENT))
+  ),
+  (
+    elevation: 2,
+    shadows:
+      ((0, 3px, 1px, -2px, $KEY_UMBRA), (0, 2px, 2px, 0, $KEY_PENUMBRA), (0, 1px, 5px, 0, $AMBIENT))
+  ),
+  (
+    elevation: 3,
+    shadows:
+      ((0, 3px, 3px, -2px, $KEY_UMBRA), (0, 3px, 4px, 0, $KEY_PENUMBRA), (0, 1px, 8px, 0, $AMBIENT))
+  ),
+  (
+    elevation: 4,
+    shadows:
+      (
+        (0, 2px, 4px, -1px, $KEY_UMBRA),
+        (0, 4px, 5px, 0, $KEY_PENUMBRA),
+        (0, 1px, 10px, 0, $AMBIENT)
+      )
+  ),
+  (
+    elevation: 6,
+    shadows:
+      (
+        (0, 3px, 5px, -1px, $KEY_UMBRA),
+        (0, 6px, 10px, 0, $KEY_PENUMBRA),
+        (0, 1px, 18px, 0, $AMBIENT)
+      )
+  ),
+  (
+    elevation: 8,
+    shadows:
+      (
+        (0, 5px, 5px, -3px, $KEY_UMBRA),
+        (0, 8px, 10px, 1px, $KEY_PENUMBRA),
+        (0, 3px, 14px, 2px, $AMBIENT)
+      )
+  ),
+  (
+    elevation: 16,
+    shadows:
+      (
+        (0, 8px, 10px, -5px, $KEY_UMBRA),
+        (0, 16px, 24px, 2px, $KEY_PENUMBRA),
+        (0, 6px, 30px, 5px, $AMBIENT)
+      )
+  )
+);
+
+// Material Design component elevations
+// @credit https://material.google.com/material-design/elevation-shadows.html
+$MATERIAL_COMPONENTS: (
+  'appBar': 4,
+  'bottomNavBar': 8,
+  'bottomSheet': 16,
+  'card': 2 8 'hover',
+  'dialog': 24,
+  'fab': 6 12 'active',
+  'menu': 8,
+  'navDrawer': 16,
+  'picker': 24,
+  'quickEntry': 2 3 'active',
+  'raisedButton': 2 8 'active',
+  'refreshIndicator': 3,
+  'rightDrawer': 16,
+  'searchBar': 2 3 'active',
+  'snackbar': 6,
+  'subMenu_3': 11,
+  'subMenu_2': 10,
+  'subMenu_1': 9,
+  'switch': 1
+);
+
+// Function: findBoundingShadowSets
+// Returns the two reference shadows whose elevations bound the specified
+// elevation. In the case where the supplied elevation exceeds the maximum
+// reference elevation, the last two reference shadows are returned.
+// @access private
+// @param {Number} $elevation
+// @return {List}
+@function findBoundingShadowSets($elevation) {
+  $lower: nth($REFERENCE_SHADOWS, length($REFERENCE_SHADOWS) - 1);
+  $upper: nth($REFERENCE_SHADOWS, length($REFERENCE_SHADOWS));
+  @if $elevation < 0 {
+    @error 'Elevation is less than zero';
+  }
+  @for $i from 1 to length($REFERENCE_SHADOWS) {
+    $lower: nth($REFERENCE_SHADOWS, $i);
+    $upper: nth($REFERENCE_SHADOWS, $i + 1);
+    @if (map-get($lower, 'elevation') <= $elevation) and (map-get($upper, 'elevation') > $elevation)
+    {
+      @return ($lower, $upper);
+    }
+  }
+  @return ($lower, $upper);
+}
+
+// Function: lerp
+// Performs linear interpolation between values a and b. Returns the value
+// between a and b proportional to x (when x is between 0 and 1. When x is
+// outside this range, the return value is a linear extrapolation).
+// @access private
+// @param {Number} $x
+// @param {Number} $a
+// @param {Number} $b
+// @return {Number}
+@function lerp($x, $a, $b) {
+  @return $a + $x * ($b - $a);
+}
+
+// Function: lerpShadow
+// @access private
+// @param {Number} $x
+// @param {List} $shadow1
+// @param {List} $shadow2
+// @return {List}
+@function lerpShadow($x, $shadow1, $shadow2) {
+  // Round all parameters, as shadow definitions do not support subpixels
+  $newX: round(lerp($x, nth($shadow1, 1), nth($shadow2, 1))) + 0;
+  $newY: round(lerp($x, nth($shadow1, 2), nth($shadow2, 2))) + 0;
+  $newBlur: round(lerp($x, nth($shadow1, 3), nth($shadow2, 3))) + 0;
+  $newSpread: round(lerp($x, nth($shadow1, 4), nth($shadow2, 4))) + 0;
+  $newColor: nth($shadow1, 5); // No need to lerp the shadow color
+  @return ($newX $newY $newBlur $newSpread $newColor);
+}
+
+// Function: calculateShadowSetAtDepth
+// Calculates the set of shadows at a given elevation.
+// @access private
+// @param {Number} $elevation
+// @return {List}
+@function calculateShadowSetAtDepth($elevation) {
+  $bounds: findBoundingShadowSets($elevation);
+  $min: nth($bounds, 1);
+  $max: nth($bounds, 2);
+  $x: ($elevation - map-get($min, 'elevation')) /
+    (map-get($max, 'elevation') - map-get($min, 'elevation'));
+  $elevationShadows: ();
+  @for $i from 1 to length(map-get($min, 'shadows')) + 1 {
+    $newShadow: lerpShadow(
+      $x,
+      nth(map-get($min, 'shadows'), $i),
+      nth(map-get($max, 'shadows'), $i)
+    );
+    $elevationShadows: append($elevationShadows, $newShadow, comma);
+  }
+  @return $elevationShadows;
+}
+
+// Mixin: mdElevation.
+// Generates box-shadow and the transition for a given elevation. A single elevation will generate a
+// single box-shadow set. Two elevations and a state will generate a default box-shadow set and
+// another set that is activated by the state (Tested with :hover and :active)
+// @param {Number} $elevation1 - depth level (0-24)
+// @param {Number} $elevation2 - depth level (0-24)
+// @param {String} $states - states to change elevation on (e.g. :hover, :focus, :active, etc.)
+@mixin mdElevation($elevation1, $elevation2: null, $states: null) {
+  @if $elevation1 == 0 {
+    box-shadow: none !important; // stylelint-disable-line declaration-no-important
+  } @else {
+    box-shadow: calculateShadowSetAtDepth($elevation1);
+  }
+  @if $elevation2 != null {
+    @include mdElevationTransition($elevation2 - $elevation1);
+    @each $state in $states {
+      &:#{$state} {
+        @if $elevation2 == 0 {
+          box-shadow: none !important; // stylelint-disable-line declaration-no-important
+        } @else {
+          box-shadow: calculateShadowSetAtDepth($elevation2);
+        }
+      }
+    }
+  }
+}
+
+// Mixin: mdElevationTransition.
+// Generates the transition for a change between 2 elevations
+// The larger the elevation change the longer the animation takes
+// @param {Number} $elevationChange - delta between beginning and ending elevation
+// @param {String/List} $easing - easing function
+@mixin mdElevationTransition($elevationChange: 6, $easing: cubic-bezier(0.4, 0, 0.2, 1)) {
+  $duration: lerp($elevationChange / 24, $MIN_ANIMATION_LENGTH, $MAX_ANIMATION_LENGTH);
+
+  transition: box-shadow $duration $easing;
+}
+
+// Mixin: mdElevationComponent.
+// Returns box-shadow and transition properties for Material Design elements
+// @param {String} $componentName - one of the $MATERIAL_COMPONENTS keys
+@mixin mdElevationComponent($componentName) {
+  $attr: get($MATERIAL_COMPONENTS, $componentName, 'mdElevationComponent mixin');
+  @if length($attr) == 1 {
+    @include mdElevation(nth($attr, 1));
+  } @else {
+    @include mdElevation(nth($attr, 1), nth($attr, 2), nth($attr, 3));
+  }
+}
+
+// NOTE: not adding the CSS class for the momnet but keeping the code in case we change our mind.
+// CSS md-elevation-z# variables
+// @for $zValue from 0 through 24 {
+//   .md-elevation-z#{$zValue} {
+//     @include mdElevation($zValue);
+//   }
+// }
+// CSS transistion class
+// .md-elevation-transition {
+//   transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+// }
+// CSS classes for Material Design elements
+// @each $element, $attr in $MATERIAL_COMPONENTS {
+//   .md-elevation-#{$element} {
+//     @if length($attr) == 1 {
+//       @include mdElevation(nth($attr, 1));
+//     } @else {
+//       @include mdElevation(nth($attr, 1), nth($attr, 2), nth($attr, 3));
+//     }
+//   }
+// }

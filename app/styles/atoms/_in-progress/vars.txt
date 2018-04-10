@@ -1,0 +1,43 @@
+// obviously needed
+$EM_BASE: 16px;
+$aspect-ratios: ()
+$display-opts: ()
+$float-opts: ()
+$clear-opts: ()
+$height-opts: ()
+$margin-opts: ()
+$padding-opts: ()
+$position-opts: ()
+$coordinate-opts: ()
+$zindex-opts: ()
+$width-opts: ()
+$background-position-opts: ()
+$background-size-opts: ()
+$backgrounds: ()
+$border-width-opts: ()
+$border-radius-opts: ()
+$border-style-opts: ()
+$borders: ()
+$color-palettes: ()
+$primary-palette: ""
+$accent-palette: ""
+$error-palette: ""
+$success-palette: ""
+$error-palette: ""
+$default-palette-shade: ""
+$font-families: ()
+$primary-font-family: ""
+$accent-font-family: ""
+$code-font-family: ""
+$font-size-scale: ()
+$kerning-scale: ()
+$line-height-scale: ()
+$typesets
+
+// questionable - maybe make them $DEFAULT_OPTS and all adding others? (See font-family & color-palette, typography)
+$font-weight-opts
+$text-align-opts
+$text-decoration-opts
+$text-transform-opts
+$vertical-align-opts
+$white-space-opts

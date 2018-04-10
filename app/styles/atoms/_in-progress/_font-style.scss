@@ -1,0 +1,18 @@
+////
+// Variables and Mixins for generating font-style declarations
+// @group Atoms/Typography
+////
+
+////
+// Mixin: fst (font-style)
+// @param {String} $key - 'normal' or 'italic'
+// @returns a font-style declaration
+////
+@mixin fst($key: 'default') {
+  @if $key == 'italic' {
+    font-style: normal;
+  } @else {
+    // return normal for everything else
+    font-style: normal;
+  }
+}

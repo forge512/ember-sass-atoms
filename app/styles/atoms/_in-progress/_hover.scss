@@ -1,0 +1,226 @@
+////
+// Variables and Mixins for
+// @group Atoms/Theming
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin:
+// @param
+// @returns
+////
+
+// /*
+//
+//   HOVER EFFECTS
+//   Docs: http://tachyons.io/docs/themes/hovers/
+//
+//     - Dim
+//     - Glow
+//     - Hide Child
+//     - Underline text
+//     - Grow
+//     - Pointer
+//     - Shadow
+//
+// */
+//
+// /*
+//
+//   Dim element on hover by adding the dim class.
+//
+// */
+// .dim {
+//   opacity: 1;
+//   transition: opacity .15s ease-in;
+// }
+// .dim:hover,
+// .dim:focus {
+//   opacity: .5;
+//   transition: opacity .15s ease-in;
+// }
+// .dim:active {
+//   opacity: .8; transition: opacity .15s ease-out;
+// }
+//
+// /*
+//
+//   Animate opacity to 100% on hover by adding the glow class.
+//
+// */
+// .glow {
+//   transition: opacity .15s ease-in;
+// }
+// .glow:hover,
+// .glow:focus {
+//   opacity: 1;
+//   transition: opacity .15s ease-in;
+// }
+//
+// /*
+//
+//   Hide child & reveal on hover:
+//
+//   Put the hide-child class on a parent element and any nested element with the
+//   child class will be hidden and displayed on hover or focus.
+//
+//   <div class="hide-child">
+//     <div class="child"> Hidden until hover or focus </div>
+//     <div class="child"> Hidden until hover or focus </div>
+//     <div class="child"> Hidden until hover or focus </div>
+//     <div class="child"> Hidden until hover or focus </div>
+//   </div>
+// */
+//
+// .hide-child .child {
+//   opacity: 0;
+//   transition: opacity .15s ease-in;
+// }
+// .hide-child:hover  .child,
+// .hide-child:focus  .child,
+// .hide-child:active .child {
+//   opacity: 1;
+//   transition: opacity .15s ease-in;
+// }
+//
+// .underline-hover:hover,
+// .underline-hover:focus {
+//   text-decoration: underline;
+// }
+//
+// /* Can combine this with overflow-hidden to make background images grow on hover
+//  * even if you are using background-size: cover */
+//
+// .grow {
+//   -moz-osx-font-smoothing: grayscale;
+//   backface-visibility: hidden;
+//   transform: translateZ(0);
+//   transition: transform 0.25s ease-out;
+// }
+//
+// .grow:hover,
+// .grow:focus {
+//   transform: scale(1.05);
+// }
+//
+// .grow:active {
+//   transform: scale(.90);
+// }
+//
+// .grow-large {
+//   -moz-osx-font-smoothing: grayscale;
+//   backface-visibility: hidden;
+//   transform: translateZ(0);
+//   transition: transform .25s ease-in-out;
+// }
+//
+// .grow-large:hover,
+// .grow-large:focus {
+//   transform: scale(1.2);
+// }
+//
+// .grow-large:active {
+//   transform: scale(.95);
+// }
+//
+// /* Add pointer on hover */
+//
+// .pointer:hover {
+//   cursor: pointer;
+// }
+//
+// /*
+//    Add shadow on hover.
+//
+//    Performant box-shadow animation pattern from
+//    http://tobiasahlin.com/blog/how-to-animate-box-shadow/
+// */
+//
+// .shadow-hover {
+//   cursor: pointer;
+//   position: relative;
+//   transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+// }
+//
+// .shadow-hover::after {
+//   content: '';
+//   box-shadow: 0px 0px 16px 2px rgba( 0, 0, 0, .2 );
+//   border-radius: inherit;
+//   opacity: 0;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   z-index: -1;
+//   transition: opacity 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+// }
+//
+// .shadow-hover:hover::after,
+// .shadow-hover:focus::after {
+//   opacity: 1;
+// }
+//
+// /* Combine with classes in skins and skins-pseudo for
+//  * many different transition possibilities. */
+//
+// .bg-animate,
+// .bg-animate:hover,
+// .bg-animate:focus {
+//   transition: background-color .15s ease-in-out;
+// }
+
+// .hover-black:hover,
+// .hover-black:focus { color: var(--black); }
+// .hover-near-black:hover,
+// .hover-near-black:focus { color: var(--near-black); }
+// .hover-dark-gray:hover,
+// .hover-dark-gray:focus { color: var(--dark-gray); }
+// .hover-mid-gray:hover,
+// .hover-mid-gray:focus { color: var(--mid-gray); }
+// .hover-gray:hover,
+// .hover-gray:focus { color: var(--gray); }
+// .hover-silver:hover,
+// .hover-silver:focus { color: var(--silver); }
+// .hover-light-silver:hover,
+// .hover-light-silver:focus { color: var(--light-silver); }
+// .hover-moon-gray:hover,
+// .hover-moon-gray:focus { color: var(--moon-gray); }
+// .hover-light-gray:hover,
+// .hover-light-gray:focus { color: var(--light-gray); }
+// .hover-near-white:hover,
+// .hover-near-white:focus { color: var(--near-white); }
+// .hover-white:hover,
+// .hover-white:focus { color: var(--white); }
+
+// .hover-bg-black:hover,
+// .hover-bg-black:focus { background-color: var(--black); }
+// .hover-bg-near-black:hover,
+// .hover-bg-near-black:focus { background-color: var(--near-black); }
+// .hover-bg-dark-gray:hover,
+// .hover-bg-dark-gray:focus { background-color: var(--dark-gray); }
+// .hover-bg-mid-gray:hover,
+// .hover-bg-mid-gray:focus { background-color: var(--mid-gray); }
+// .hover-bg-gray:hover,
+// .hover-bg-gray:focus { background-color: var(--gray); }
+// .hover-bg-silver:hover,
+// .hover-bg-silver:focus { background-color: var(--silver); }
+// .hover-bg-light-silver:hover,
+// .hover-bg-light-silver:focus { background-color: var(--light-silver); }
+// .hover-bg-moon-gray:hover,
+// .hover-bg-moon-gray:focus { background-color: var(--moon-gray); }
+// .hover-bg-light-gray:hover,
+// .hover-bg-light-gray:focus { background-color: var(--light-gray); }
+// .hover-bg-near-white:hover,
+// .hover-bg-near-white:focus { background-color: var(--near-white); }
+// .hover-bg-white:hover,
+// .hover-bg-white:focus { background-color: var(--white); }
+// .hover-bg-transparent:hover,
+// .hover-bg-transparent:focus { background-color: var(--transparent); }
