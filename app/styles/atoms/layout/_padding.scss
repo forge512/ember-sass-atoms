@@ -42,7 +42,7 @@ $padding-opts: map-merge($DEFAULT_OPTS, $padding-opts);
     // if $keys is a list...
     $values: ();
     @each $key in $keys {
-      $value: get($padding-scale, $key, 'pa mixin');
+      $value: if(map-has-key($padding-opts, $key), get($padding-opts, $key, 'pa mixin'), $key);
       $values: append($values, $value);
     }
     padding: $values;
@@ -60,12 +60,20 @@ $padding-opts: map-merge($DEFAULT_OPTS, $padding-opts);
 // @returns padding-top and padding-bottom declarations
 ////
 @mixin pv($top: 0, $bottom: null) {
-  padding-top: get($padding-opts, $top, 'pv mixin');
-  padding-bottom: if(
-    $bottom,
-    get($padding-opts, $bottom, 'pv mixin'),
-    get($padding-opts, $top, 'pv mixin')
-  );
+  @if $bottom {
+    padding-bottom: if(
+      map-has-key($padding-opts, $bottom),
+      get($padding-opts, $bottom, 'pv mixin'),
+      $bottom
+    );
+  } @else {
+    padding-bottom: if(
+      map-has-key($padding-opts, $top),
+      get($padding-opts, $top, 'pv mixin'),
+      $top
+    );
+  }
+  padding-top: if(map-has-key($padding-opts, $top), get($padding-opts, $top, 'pv mixin'), $top);
 }
 
 ////
@@ -76,12 +84,20 @@ $padding-opts: map-merge($DEFAULT_OPTS, $padding-opts);
 // @returns padding-left and padding-right declarations
 ////
 @mixin ph($left: 0, $right: null) {
-  padding-right: if(
-    $right,
-    get($padding-opts, $right, 'pv mixin'),
-    get($padding-opts, $left, 'pv mixin')
-  );
-  padding-left: get($padding-opts, $left, 'pv mixin');
+  @if $bottom {
+    padding-right: if(
+      map-has-key($padding-opts, $right),
+      get($padding-opts, $right, 'ph mixin'),
+      $right
+    );
+  } @else {
+    padding-right: if(
+      map-has-key($padding-opts, $left),
+      get($padding-opts, $left, 'ph mixin'),
+      $left
+    );
+  }
+  padding-left: if(map-has-key($padding-opts, $left), get($padding-opts, $left, 'ph mixin'), $left);
 }
 
 ////
@@ -90,7 +106,7 @@ $padding-opts: map-merge($DEFAULT_OPTS, $padding-opts);
 // @returns a padding-top declaration
 ////
 @mixin pt($key: 0) {
-  padding-top: get($padding-opts, $key, 'pt mixin');
+  padding-top: if(map-has-key($padding-opts, $key), get($padding-opts, $key, 'pt mixin'), $key);
 }
 
 ////
@@ -99,7 +115,7 @@ $padding-opts: map-merge($DEFAULT_OPTS, $padding-opts);
 // @returns a padding-right declaration
 ////
 @mixin pr($key: 0) {
-  padding-right: get($padding-opts, $key, 'pr mixin');
+  padding-right: if(map-has-key($padding-opts, $key), get($padding-opts, $key, 'pr mixin'), $key);
 }
 
 ////
@@ -108,7 +124,7 @@ $padding-opts: map-merge($DEFAULT_OPTS, $padding-opts);
 // @returns a padding-bottom declaration
 ////
 @mixin pb($key: 0) {
-  padding-bottom: get($padding-opts, $key, 'pb mixin');
+  padding-bottom: if(map-has-key($padding-opts, $key), get($padding-opts, $key, 'pb mixin'), $key);
 }
 
 ////
@@ -117,5 +133,5 @@ $padding-opts: map-merge($DEFAULT_OPTS, $padding-opts);
 // @returns a padding-left declaration
 ////
 @mixin pl($key: 0) {
-  padding-left: get($padding-opts, $key, 'pl mixin');
+  padding-left: if(map-has-key($padding-opts, $key), get($padding-opts, $key, 'pl mixin'), $key);
 }

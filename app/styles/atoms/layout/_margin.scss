@@ -42,7 +42,7 @@ $margin-opts: map-merge($DEFAULT_OPTS, $margin-opts);
     // if $keys is a list...
     $values: ();
     @each $key in $keys {
-      $value: get($margin-scale, $key, 'pa mixin');
+      $value: if(map-has-key($margin-opts, $key), get($margin-opts, $key, 'ma mixin'), $key);
       $values: append($values, $value);
     }
     margin: $values;
@@ -60,12 +60,16 @@ $margin-opts: map-merge($DEFAULT_OPTS, $margin-opts);
 // @returns margin-top and margin-bottom declarations
 ////
 @mixin mv($top: 0, $bottom: null) {
-  margin-top: get($margin-opts, $top, 'mv mixin');
-  margin-bottom: if(
-    $bottom,
-    get($margin-opts, $bottom, 'mv mixin'),
-    get($margin-opts, $top, 'mv mixin')
-  );
+  @if $bottom {
+    margin-bottom: if(
+      map-has-key($margin-opts, $bottom),
+      get($margin-opts, $bottom, 'mv mixin'),
+      $bottom
+    );
+  } @else {
+    margin-bottom: if(map-has-key($margin-opts, $top), get($margin-opts, $top, 'mv mixin'), $top);
+  }
+  margin-top: if(map-has-key($margin-opts, $top), get($margin-opts, $top, 'mv mixin'), $top);
 }
 
 ////
@@ -76,12 +80,16 @@ $margin-opts: map-merge($DEFAULT_OPTS, $margin-opts);
 // @returns margin-left and margin-right declarations
 ////
 @mixin mh($left: 0, $right: null) {
-  margin-right: if(
-    $right,
-    get($margin-opts, $right, 'mv mixin'),
-    get($margin-opts, $left, 'mv mixin')
-  );
-  margin-left: get($margin-opts, $left, 'mv mixin');
+  @if $right {
+    margin-right: if(
+      map-has-key($margin-opts, $right),
+      get($margin-opts, $right, 'mv mixin'),
+      $right
+    );
+  } @else {
+    margin-right: if(map-has-key($margin-opts, $left), get($margin-opts, $left, 'mh mixin'), $left);
+  }
+  margin-left: if(map-has-key($margin-opts, $left), get($margin-opts, $left, 'mh mixin'), $left);
 }
 
 ////
@@ -90,7 +98,7 @@ $margin-opts: map-merge($DEFAULT_OPTS, $margin-opts);
 // @returns a margin-top declaration
 ////
 @mixin mt($key: 0) {
-  margin-top: get($margin-opts, $key, 'mt mixin');
+  margin-top: if(map-has-key($margin-opts, $key), get($margin-opts, $key, 'mt mixin'), $key);
 }
 
 ////
@@ -99,7 +107,7 @@ $margin-opts: map-merge($DEFAULT_OPTS, $margin-opts);
 // @returns a margin-right declaration
 ////
 @mixin mr($key: 0) {
-  margin-right: get($margin-opts, $key, 'mr mixin');
+  margin-right: if(map-has-key($margin-opts, $key), get($margin-opts, $key, 'mr mixin'), $key);
 }
 
 ////
@@ -108,7 +116,7 @@ $margin-opts: map-merge($DEFAULT_OPTS, $margin-opts);
 // @returns a margin-bottom declaration
 ////
 @mixin mb($key: 0) {
-  margin-bottom: get($margin-opts, $key, 'mb mixin');
+  margin-bottom: if(map-has-key($margin-opts, $key), get($margin-opts, $key, 'mb mixin'), $key);
 }
 
 ////
@@ -117,5 +125,5 @@ $margin-opts: map-merge($DEFAULT_OPTS, $margin-opts);
 // @returns a margin-left declaration
 ////
 @mixin ml($key: 0) {
-  margin-left: get($margin-opts, $key, 'ml mixin');
+  margin-left: if(map-has-key($margin-opts, $key), get($margin-opts, $key, 'ml mixin'), $key);
 }

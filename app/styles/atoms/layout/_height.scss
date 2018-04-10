@@ -44,7 +44,7 @@ $height-opts: map-merge($DEFAULT_OPTS, $height-opts);
 // @returns a height declaration
 ////
 @mixin height($key: 'default') {
-  height: get($height-opts, $key, 'height mixin');
+  height: if(map-has-key($height-opts, $key), get($height-opts, $key, 'height mixin'), $key);
 }
 
 ////
@@ -53,7 +53,7 @@ $height-opts: map-merge($DEFAULT_OPTS, $height-opts);
 // @returns a max-height declaration
 ////
 @mixin max-height($key: 'default') {
-  max-height: get($height-opts, $key, 'max-height mixin');
+  max-height: if(map-has-key($height-opts, $key), get($height-opts, $key, 'height mixin'), $key);
 }
 
 ////
@@ -62,5 +62,5 @@ $height-opts: map-merge($DEFAULT_OPTS, $height-opts);
 // @returns a min-height declaration
 ////
 @mixin min-height($key: 'default') {
-  min-height: get($height-opts, $key, 'min-height mixin');
+  min-height: if(map-has-key($height-opts, $key), get($height-opts, $key, 'height mixin'), $key);
 }

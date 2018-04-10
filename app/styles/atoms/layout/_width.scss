@@ -52,7 +52,7 @@ $width-opts: map-merge($DEFAULT_OPTS, $aspect-ratios);
 // @returns a width declaration
 ////
 @mixin width($key: 'default') {
-  width: get($width-opts, $key, 'width mixin');
+  width: if(map-has-key($width-opts, $key), get($width-opts, $key, 'min-width mixin'), $key);
 }
 
 ////
@@ -61,7 +61,7 @@ $width-opts: map-merge($DEFAULT_OPTS, $aspect-ratios);
 // @returns a max-width declaration
 ////
 @mixin max-width($key: 'default') {
-  max-width: get($width-opts, $key, 'max-width mixin');
+  max-width: if(map-has-key($width-opts, $key), get($width-opts, $key, 'min-width mixin'), $key);
 }
 
 ////
@@ -70,5 +70,5 @@ $width-opts: map-merge($DEFAULT_OPTS, $aspect-ratios);
 // @returns a min-width declaration
 ////
 @mixin min-width($key: 'default') {
-  min-width: get($width-opts, $key, 'min-width mixin');
+  min-width: if(map-has-key($width-opts, $key), get($width-opts, $key, 'min-width mixin'), $key);
 }
