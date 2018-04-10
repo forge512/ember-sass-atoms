@@ -1,0 +1,14 @@
+////
+// Mixin for generating font-color declarations
+// @group Atoms/Theming
+////
+
+////
+// Mixin: fc (font color)
+// @param {String | Map} $palette - (Required) name of a palette in $color-palettes or a color map
+// @param {String} $shade - (Optional) name of the palette shade
+// @returns - a color declaration
+////
+@mixin fc($palette, $shade) {
+  color: color($palette, $shade);
+}

@@ -17,10 +17,32 @@ $DEFAUlT_FAMILIES: (
   'times': (times, 'times new roman', serif)
 );
 
-$font-family-sets: map-merge(
-  ('default': ('helvetica neue', helvetica, ubuntu, roboto, arial, sans-serif)),
-  $DEFAUlT_FAMILIES
-) !default;
+////
+// $font-families - Map of font-family lists
+// @example Define and add a font-family to $font-families
+// $my-font-family: ('PT Sans', arial, sans-serif)
+// $font-families: map-merge($color-palettes, ('my-font-family': $my-font-family));
+// $my-font-familiy can now be accessed by calling:
+// `@include ff('my-font-family')`
+////
+$font-families: () !default;
+
+// set the theme defaults
+$primary-font-family: 'roboto' !default;
+$accent-font-family: 'georgia' !default;
+$code-font-family: 'monospace' !default;
+
+// merge in the default font-families
+$font-families: map-merge($DEFAUlT_FAMILIES, $font-families);
+$font-families: map-merge(
+  (
+    'default': get($DEFAUlT_FAMILIES, 'sans-serif'),
+    'theme-primary': get($DEFAUlT_FAMILIES, $primary-font-family),
+    'theme-accent': get($DEFAUlT_FAMILIES, $primary-font-family),
+    'theme-code': get($DEFAUlT_FAMILIES, $primary-font-family)
+  ),
+  $font-families
+);
 
 // ============================================================================
 // Mixins
@@ -32,5 +54,5 @@ $font-family-sets: map-merge(
 // @returns a font-family declaration
 ////
 @mixin ff($key: 'default') {
-  font-family: get($font-family-sets, $key, 'ff mixin');
+  font-family: get($font-families, $key, 'ff mixin');
 }

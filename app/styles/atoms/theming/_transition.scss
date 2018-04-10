@@ -6,9 +6,8 @@
 // ============================================================================
 // Variables
 // ============================================================================
-
 // @credit https://github.com/angular/material/src/core/style/variables.scss
-$TRANSITION_SCALE: (
+$DEFAULT_OPTS: (
   'swiftEaseOut': ('duration': 0.4s, 'timingFunc': cubic-bezier(0.25, 0.8, 0.25, 1)),
   'swiftEaseIn': ('duration': 0.3s, 'timingFunc': cubic-bezier(0.55, 0, 0.55, 0.2)),
   'swiftEaseInOut': ('duration': 0.5s, 'timingFunc': cubic-bezier(0.35, 0, 0.25, 1)),
@@ -16,6 +15,12 @@ $TRANSITION_SCALE: (
   'materialEnter': ('duration': 0.3s, 'timingFunc': cubic-bezier(0, 0, 0.2, 1)),
   'materialLeave': ('duration': 0.3s, 'timingFunc': cubic-bezier(0.4, 0, 1, 1))
 );
+
+// Allow consumers to define their own options
+$transition-opts: () !default;
+
+// merge in the default options
+$transition-opts: map-merge($DEFAULT_OPTS, $transition-opts);
 
 // ============================================================================
 // Mixins
@@ -28,6 +33,6 @@ $TRANSITION_SCALE: (
 // @returns a transition declaration
 ////
 @mixin transition($property: 'all', $transition: 'swiftEaseInOut') {
-  $opts: get($TRANSITION_SCALE, $transition, 'transition mixin');
+  $opts: get($transition-opts, $transition, 'transition mixin');
   transition: $property get($opts, 'duration') get($opts, 'timingFunc');
 }

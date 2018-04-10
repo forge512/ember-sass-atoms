@@ -6,21 +6,27 @@
 // ============================================================================
 // Variables
 // ============================================================================
+$DEFAULT_FLOAT-OPTS: (
+  'default': none,
+  'none': none,
+  'left': left,
+  'right': right
+);
+$DEFAULT_CLEAR_OPTS: (
+  'default': none,
+  'none': none,
+  'left': left,
+  'right': right,
+  'both': both
+);
 
-$float-opts: (
-  'default': 'none',
-  'none': 'none',
-  'left': 'left',
-  'right': 'right'
-) !default;
+// Allow consumers to define their own options
+$float-opts: () !default;
+$clear-opts: () !default;
 
-$clear-opts: (
-  'default': 'none',
-  'none': 'none',
-  'left': 'left',
-  'right': 'right',
-  'both': 'both'
-) !default;
+// merge in the default options
+$float-opts: map-merge($DEFAULT_FLOAT-OPTS, $float-opts);
+$clear-opts: map-merge($DEFAULT_CLEAR_OPTS, $clear-opts);
 
 // ============================================================================
 // Mixins

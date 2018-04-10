@@ -6,13 +6,18 @@
 // ============================================================================
 // Variables
 // ============================================================================
+$DEFAULT_OPTS: (
+  'default': none,
+  'upper': uppercase,
+  'lower': lowercase,
+  'capital': capitalize
+);
 
-$text-transform-opts: (
-  'default': 'none',
-  'upper': 'uppercase',
-  'lower': 'lowercase',
-  'capital': 'capitalize'
-) !default;
+// Allow consumers to define their own options
+$text-transform-opts: () !default;
+
+// merge in the default options
+$text-transform-opts: map-merge($DEFAULT_OPTS, $text-transform-opts);
 
 // ============================================================================
 // Mixins

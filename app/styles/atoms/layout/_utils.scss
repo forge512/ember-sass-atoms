@@ -1,0 +1,12 @@
+////
+// Layout mixins that don't fit anywhere else
+// @group Atoms/Layout
+////
+
+////
+// Mixin: squish - removes all margin & padding
+////
+@mixin squish {
+  @include pa('none');
+  @include ma('none');
+}

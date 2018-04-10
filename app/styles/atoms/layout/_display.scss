@@ -6,21 +6,26 @@
 // ============================================================================
 // Variables
 // ============================================================================
+$DEFAULT_OPTS: (
+  'default': initial,
+  'none': none,
+  'inline': inline,
+  'block': block,
+  'inline-block': inline-block,
+  'inline-table': inline-table,
+  'table': table,
+  'table-cell': table-cell,
+  'table-row': table-row,
+  'table-row-group': table-row-group,
+  'table-column': table-column,
+  'table-column-group': table-column-group
+);
 
-$display-opts: (
-  'default': 'initial',
-  'none': 'none',
-  'inline': 'inline',
-  'block': 'block',
-  'inline-block': 'inline-block',
-  'inline-table': 'inline-table',
-  'table': 'table',
-  'table-cell': 'table-cell',
-  'table-row': 'table-row',
-  'table-row-group': 'table-row-group',
-  'table-column': 'table-column',
-  'table-column-group': 'table-column-group'
-) !default;
+// Allow consumers to define their own options
+$display-opts: () !default;
+
+// merge in the default options
+$display-opts: map-merge($DEFAULT_OPTS, $display-opts);
 
 // ============================================================================
 // Mixins

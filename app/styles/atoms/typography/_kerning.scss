@@ -6,16 +6,21 @@
 // ============================================================================
 // Variables
 // ============================================================================
-
-$kerning-scale: (
-  'default': 'normal',
+$DEFAULT_OPTS: (
+  'default': normal,
   1: -0.01em,
   2: -0.005em,
-  3: 'normal',
+  3: normal,
   4: 0.005em,
   5: 0.01em,
   6: 0.02em
-) !default;
+);
+
+// Allow consumers to define their own options
+$kerning-scale: () !default;
+
+// merge in the default options
+$kerning-scale: map-merge($DEFAULT_OPTS, $kerning-scale);
 
 // ============================================================================
 // Mixins

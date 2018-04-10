@@ -6,11 +6,10 @@
 // ============================================================================
 // Variables
 // ============================================================================
-
-$font-weight-scale: (
-  'default': 'normal',
-  'normal': 'normal',
-  'bold': 'bold',
+$DEFAULT_OPTS: (
+  'default': normal,
+  'normal': normal,
+  'bold': bold,
   1: 100,
   2: 200,
   3: 300,
@@ -20,7 +19,13 @@ $font-weight-scale: (
   7: 700,
   8: 800,
   9: 900
-) !default;
+);
+
+// Allow consumers to define their own options
+$font-weight-opts: () !default;
+
+// merge in the default options
+$font-weight-opts: map-merge($DEFAULT_OPTS, $font-weight-opts);
 
 // ============================================================================
 // Mixins
@@ -32,5 +37,5 @@ $font-weight-scale: (
 // @returns a font-weight declaration
 ////
 @mixin fw($key: 'default') {
-  font-weight: get($font-weight-scale, $key, 'fw mixin');
+  font-weight: get($font-weight-opts, $key, 'fw mixin');
 }

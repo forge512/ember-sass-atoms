@@ -6,16 +6,24 @@
 // ============================================================================
 // Variables
 // ============================================================================
+$DEFAULT_WHITESPACE_OPTS: (
+  'default': normal,
+  'nowrap': nowrap,
+  'pre': pre
+);
+$DEFAULT_WORD_BREAK_OPTS: (
+  'default': normal,
+  'break-all': break-all,
+  'keep-all': keep-all
+);
 
-$white-space-opts: (
-  'default': 'normal',
-  'nowrap': 'nowrap',
-  'pre': 'pre'
-) !default;
+// Allow consumers to define their own options
+$white-space-opts: () !default;
+$word-break-opts: () !default;
 
-// .word-normal { word-break: normal; }
-// .word-wrap { word-break: break-all; }
-// .word-nowrap { word-break: keep-all; }
+// merge in the default options
+$white-space-opts: map-merge($DEFAULT_WHITESPACE_OPTS, $white-space-opts);
+$word-break-opts: map-merge($DEFAULT_WORD_BREAK_OPTS, $word-break-opts);
 
 // ============================================================================
 // Mixins
@@ -28,4 +36,13 @@ $white-space-opts: (
 ////
 @mixin ws($key: 'default') {
   white-space: get($white-space-opts, $key, 'ws mixin');
+}
+
+////
+// Mixin: wb
+// @param {String} $key - one of the kyes in $word-break-opts
+// @returns a white-space declaration
+////
+@mixin wb($key: 'default') {
+  word-break: get($word-break-opts, $key, 'wb mixin');
 }

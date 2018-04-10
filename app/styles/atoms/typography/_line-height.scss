@@ -6,8 +6,7 @@
 // ============================================================================
 // Variables
 // ============================================================================
-
-$line-height-scale: (
+$DEFAULT_OPTS: (
   'default': 1.25em,
   1: 1em,
   2: 1.0667em,
@@ -16,7 +15,13 @@ $line-height-scale: (
   5: 1.3333em,
   6: 1.5em,
   7: 1.75em
-) !default;
+);
+
+// Allow consumers to define their own options
+$line-height-opts: () !default;
+
+// merge in the default options
+$line-height-opts: map-merge($DEFAULT_OPTS, $line-height-opts);
 
 // ============================================================================
 // Mixins
@@ -24,9 +29,9 @@ $line-height-scale: (
 
 ////
 // Mixin: lh
-// @param {String} $key - one of the keys in $line-height-scale
+// @param {String} $key - one of the keys in $line-height-opts
 // @returns a line-height declaration
 ////
 @mixin lh($key: 'default') {
-  line-height: get($line-height-scale, $key, 'lh mixin');
+  line-height: get($line-height-opts, $key, 'lh mixin');
 }

@@ -6,7 +6,7 @@
 // ============================================================================
 // Variables
 // ============================================================================
-$font-size-scale: (
+$DEFAULT_OPTS: (
   'default': rem(14),
   1: rem(10),
   2: rem(12),
@@ -18,7 +18,13 @@ $font-size-scale: (
   8: rem(45),
   9: rem(56),
   10: rem(112)
-) !default;
+);
+
+// Allow consumers to define their own options
+$font-size-opts: () !default;
+
+// merge in the default options
+$font-size-opts: map-merge($DEFAULT_OPTS, $font-size-opts);
 
 // ============================================================================
 // Mixins
@@ -26,9 +32,9 @@ $font-size-scale: (
 
 ////
 // Mixin: fsz (font-size)
-// @param {String} $key - one of the keys in $font-size-scale
+// @param {String} $key - one of the keys in $font-size-opts
 // @returns a font-size declaration
 ////
 @mixin fsz($key: 'default') {
-  font-size: get($font-size-scale, $key, 'fsz mixin');
+  font-size: get($font-size-opts, $key, 'fsz mixin');
 }

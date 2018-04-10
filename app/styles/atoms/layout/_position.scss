@@ -1,0 +1,141 @@
+////
+// Variables and Mixins for generating postion declarations
+// @group Atoms/Layout
+////
+
+// ============================================================================
+// Variables
+// ============================================================================
+$DEFAULT_POSITION_OPTS: (
+  'default': relative,
+  'static': static,
+  'relative': relative,
+  'absolute': absolute,
+  'fixed': fixed
+);
+$DEFAULT_COORDINATE_OPTS: (
+  'default': auto,
+  'auto': auto,
+  0: 0,
+  1: rem(8),
+  2: rem(16),
+  3: rem(24),
+  4: rem(32),
+  5: rem(56),
+  6: rem(64),
+  7: rem(128),
+  8: rem(256),
+  '25%': 25%,
+  '33%': calc(100% / 3),
+  '50%': 50%
+);
+$DEFAULT_ZINDEX_OPTS: (
+  'default': 0,
+  'auto': auto,
+  'initial': initial,
+  'inherit': inherit,
+  'unset': unset,
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  999: 999,
+  9999: 9999,
+  'max': 2147483647
+);
+
+// Allow consumers to define their own options
+$position-opts: () !default;
+$coordinate-opts: () !default;
+$zindex-opts: () !default;
+
+// merge in the default options
+$position-opts: map-merge($DEFAULT_POSITION_OPTS, $position-opts);
+$coordinate-opts: map-merge($DEFAULT_COORDINATE_OPTS, $coordinate-opts);
+$zindex-opts: map-merge($DEFAULT_ZINDEX_OPTS, $zindex-opts);
+
+// ============================================================================
+// Mixins
+// ============================================================================
+
+////
+// Mixin: position
+// @param {String} $postion - a key in $position-opts
+// @param {Map} $coordinates - a Map of keys in $coordinates-opts or specific values
+// @param {String} $zindex - a key in $zindex-opts
+// @example `@include position('relative')`, `@include postion('absolute', (top: 1, right: '25%'), 999)`
+// @returns a position declaration
+////
+@mixin position($position: 'default', $coordinates: (), $zindex: 'default') {
+  @if $position != 'static' and length(map-keys($coordinates)) > 0 {
+    @each $key in map-keys($coordinates) {
+      @if index(('top', 'right', 'bottom', 'left'), $key) {
+        $value: get($coordinates, $key);
+        // if a value was passed in, try using it as a key otherwise just return it
+        #{$key}: if(map-has-key($coordinates-opts, $value), get($coordinates-opts, $value), $value);
+      }
+    }
+    position: get($position-opts, $position, 'position mixin');
+    z-index: get($zindex-opts, $zindex, 'position mixin');
+  }
+}
+
+////
+// Mixin: top
+// @param {Number} $key - a key in $position-opts
+// @returns a top declaration
+////
+@mixin top($key: 'default') {
+  top: get($coordinates-opts, $key, 'top mixin');
+}
+
+////
+// Mixin: right
+// @param {Number} $key - a key in $position-opts
+// @returns a right declaration
+////
+@mixin right($key: 'default') {
+  right: get($coordinates-opts, $key, 'right mixin');
+}
+
+////
+// Mixin: bottom
+// @param {Number} $key - a key in $position-opts
+// @returns a bottom declaration
+////
+@mixin bottom($key: 'default') {
+  bottom: get($coordinates-opts, $key, 'bottom mixin');
+}
+
+////
+// Mixin: left
+// @param {Number} $key - a key in $position-opts
+// @returns a left declaration
+////
+@mixin left($key: 'default') {
+  left: get($coordinates-opts, $key, 'left mixin');
+}
+
+////
+// Mixin: z-index
+// @param {Number} $key - a key in $position-opts
+// @returns a z-index declaration
+////
+@mixin z-index($key: 'default') {
+  z-index: get($zindex-opts, $key, 'z-index mixin');
+}
+
+////
+// Mixin: absolute-fill - absolute position and fill the postion: relative parent context
+// @returns a top, right, bottom, and left declarations
+// @credit https://github.com/tachyons-css/tachyons
+////
+@mixin absolute-fill() {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

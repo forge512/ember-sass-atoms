@@ -6,13 +6,19 @@
 // ============================================================================
 // Variables
 // ============================================================================
+$DEFAULT_OPTS: (
+  'default': middle,
+  'middle': middle,
+  'top': top,
+  'bottom': bottom,
+  'baseline': baseline
+);
 
-$vertical-align-opts: (
-  'default': 'middle',
-  'middle': 'middle',
-  'top': 'top',
-  'bottom': 'bottom' 'baseline': 'baseline'
-) !default;
+// Allow consumers to define their own options
+$vertical-align-opts: () !default;
+
+// merge in the default options
+$vertical-align-opts: map-merge($DEFAULT_OPTS, $vertical-align-opts);
 
 // ============================================================================
 // Mixins
