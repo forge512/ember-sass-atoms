@@ -1,8 +1,11 @@
 {
   "name": "ember-sass-atoms",
-  "version": "0.0.0-alpha.1",
+  "version": "0.0.0-alpha.2",
   "description": "Sass Toolkit Inspired by Material Design & Tachyons",
-  "keywords": ["ember-addon", "sass"],
+  "keywords": [
+    "ember-addon",
+    "sass"
+  ],
   "license": "MIT",
   "contributors": "Michael Swanson <mswanson@forge512.com>",
   "directories": {
