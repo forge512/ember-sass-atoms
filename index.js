@@ -7,7 +7,7 @@ module.exports = {
     this._super.included.apply(this, arguments);
   },
 
-  isDevelopingAddon() {
-    return true;
-  }
+  // isDevelopingAddon() {
+  //   return true;
+  // }
 };

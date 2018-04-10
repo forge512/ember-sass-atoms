@@ -77,9 +77,9 @@ $zindex-opts: map-merge($DEFAULT_ZINDEX_OPTS, $zindex-opts);
         #{$key}: if(map-has-key($coordinates-opts, $value), get($coordinates-opts, $value), $value);
       }
     }
-    position: get($position-opts, $position, 'position mixin');
-    z-index: get($zindex-opts, $zindex, 'position mixin');
   }
+  position: get($position-opts, $position, 'position mixin');
+  z-index: get($zindex-opts, $zindex, 'position mixin');
 }
 
 ////
