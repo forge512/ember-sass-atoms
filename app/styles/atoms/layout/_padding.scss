@@ -84,7 +84,7 @@ $padding-opts: map-merge($DEFAULT_OPTS, $padding-opts);
 // @returns padding-left and padding-right declarations
 ////
 @mixin ph($left: 0, $right: null) {
-  @if $bottom {
+  @if $right {
     padding-right: if(
       map-has-key($padding-opts, $right),
       get($padding-opts, $right, 'ph mixin'),
