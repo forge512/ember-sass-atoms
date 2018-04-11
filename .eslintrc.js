@@ -14,13 +14,13 @@ module.exports = {
     // node files
     {
       files: [
+        'ember-cli-build.js',
         'index.js',
         'testem.js',
-        'ember-cli-build.js',
         'config/**/*.js',
         'tests/dummy/config/**/*.js',
       ],
-      excludedFiles: ['app/**', 'addon/**', 'tests/dummy/app/**'],
+      excludedFiles: ['addon/**', 'addon-test-support/**', 'app/**', 'tests/dummy/app/**'],
       parserOptions: {
         sourceType: 'script',
         ecmaVersion: 2015,
