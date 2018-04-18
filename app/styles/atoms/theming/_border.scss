@@ -55,15 +55,22 @@ $borders: map-merge($DEFAULT_BORDERS, $borders);
 
 ////
 // Function: resolve-keys
-// @param {String} $keys - list of keys to the width, style, and color maps
+// @param {String} $keys - list of keys to the borders or width, style, and color maps
 // @returns - a list of the resolved values
 ////
 @function resolve-keys($keys) {
-  $values: ();
-  $values: append($values, get($border-width-opts, nth($keys, 1), 'ba mixin'));
-  $values: append($values, get($border-style-opts, nth($keys, 2), 'ba mixin'));
-  $values: append($values, get($border-color-opts, nth($keys, 3), 'ba mixin'));
-  @return $resolved-values;
+  $values: null;
+  @if length($keys) == 0 {
+    $values: get($borders, 'black', 'resolve-keys fn');
+  } @else if length($keys) == 1 and map-has-key($borders, nth($keys, 1)) {
+    $values: get($borders, nth($keys, 1), 'resolve-keys fn');
+  } @else {
+    $values: ();
+    $values: append($values, get($border-width-opts, nth($keys, 1), 'resolve-keys fn'));
+    $values: append($values, get($border-style-opts, nth($keys, 2), 'resolve-keys fn'));
+    $values: append($values, nth($keys, 3));
+  }
+  @return $values;
 }
 
 // ============================================================================
@@ -74,85 +81,51 @@ $borders: map-merge($DEFAULT_BORDERS, $borders);
 // Mixin: ba - define a border on all sides of an element
 // @param {String or List} - a key in $borders or a list of keys ($width, $style, $color)
 // @returns a border declaration
-// @examples `@include ba((1 'solid' 'black'))`, `@include ba('black')`
+// @examples `@include ba(1 'solid' color('black', lighten-5))`, `@include ba('black')`
 ////
-@mixin ba($keys: 'black') {
-  @if type-of($keys) == list {
-    // if $keys is a list...
-    $values: resolve-keys($keys);
-    border: $values;
-  } @else {
-    // if $keys is anything else...
-    border: get($borders, $keys, 'ba mixin');
-  }
+@mixin ba($keys...) {
+  @debug $keys;
+  border: resolve-keys($keys);
 }
 
 ////
 // Mixin: bt - define a top border on an element
 // @param {String or List} - a key in $borders or a list of keys ($width, $style, $color)
 // @returns a border-top declaration
-// @examples `@include bt((1 'solid' 'black'))`, `@include bt('black')`
+// @examples `@include bt(1 'solid' color('black', lighten-5))`, `@include bt('black')`
 ////
-@mixin bt($keys: 'black') {
-  @if type-of($keys) == list {
-    // if $keys is a list...
-    $values: resolve-keys($keys);
-    border-top: $values;
-  } @else {
-    // if $keys is anything else...
-    border-top: get($borders, $keys, 'bt mixin');
-  }
+@mixin bt($keys...) {
+  border-top: resolve-keys($keys);
 }
 
 ////
 // Mixin: br - define a right border on an element
 // @param {String or List} - a key in $borders or a list of keys ($width, $style, $color)
 // @returns a border-right declaration
-// @examples `@include br((1 'solid' 'black'))`, `@include br('black')`
+// @examples `@include br(1 'solid' color('black', lighten-5))`, `@include br('black')`
 ////
 @mixin br($keys: 'black') {
-  @if type-of($keys) == list {
-    // if $keys is a list...
-    $values: resolve-keys($keys);
-    border-right: $values;
-  } @else {
-    // if $keys is anything else...
-    border-right: get($borders, $keys, 'br mixin');
-  }
+  border-right: resolve-keys($keys);
 }
 
 ////
 // Mixin: bb - define a bottom border on an element
 // @param {String or List} - a key in $borders or a list of keys ($width, $style, $color)
 // @returns a border-bottom declaration
-// @examples `@include bb((1 'solid' 'black'))`, `@include bb('black')`
+// @examples `@include bb(1 'solid' color('black', lighten-5))`, `@include bb('black')`
 ////
 @mixin bb($keys: 'black') {
-  @if type-of($keys) == list {
-    // if $keys is a list...
-    $values: resolve-keys($keys);
-    border-bottom: $values;
-  } @else {
-    // if $keys is anything else...
-    border-bottom: get($borders, $keys, 'bb mixin');
-  }
+  border-bottom: resolve-keys($keys);
 }
 
 ////
 // Mixin: bl - define a left border on an element
 // @param {String or List} - a key in $borders or a list of keys ($width, $style, $color)
 // @returns a border-left declaration
-// @examples `@include bl((1 'solid' 'black'))`, `@include bl('black')`
+// @examples `@include bl(1 'solid' color('black', lighten-5))`, `@include bl('black')`
 ////
 @mixin bl($keys: 'black') {
-  @if type-of($keys) == list {
-    // if $keys is a list...
-    $values: resolve-keys($keys);
-    border-left: $values;
-  } @else {
-    // if $keys is anything else...
-    border-left: get($borders, $keys, 'bl mixin');
-  }
+  border-left: resolve-keys($keys);
 }
 
 ////

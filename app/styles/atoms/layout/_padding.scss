@@ -21,19 +21,13 @@ $padding-opts: map-merge($DEFAULT_OPTS, $padding-opts);
 // @examples `@include pa(8,8,4,8)`, `@include pa(4)`
 // @returns a padding declaration
 ////
-@mixin pa($keys: 0) {
-  @if type-of($keys) == list {
-    // if $keys is a list...
-    $values: ();
-    @each $key in $keys {
-      $value: if(map-has-key($padding-opts, $key), get($padding-opts, $key, 'pa mixin'), $key);
-      $values: append($values, $value);
-    }
-    padding: $values;
-  } @else {
-    // if $keys is anything else...
-    padding: get($padding-opts, $keys, 'pa mixin');
+@mixin pa($keys...) {
+  $values: ();
+  @each $key in $keys {
+    $value: if(map-has-key($padding-opts, $key), get($padding-opts, $key, 'pa mixin'), $key);
+    $values: append($values, $value);
   }
+  padding: $values;
 }
 
 ////

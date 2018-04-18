@@ -21,19 +21,13 @@ $margin-opts: map-merge($DEFAULT_OPTS, $margin-opts);
 // @examples `@include ma(2,2,16)`, `@include ma(128)`
 // @returns a margin declaration
 ////
-@mixin ma($keys: 0) {
-  @if type-of($keys) == list {
-    // if $keys is a list...
-    $values: ();
-    @each $key in $keys {
-      $value: if(map-has-key($margin-opts, $key), get($margin-opts, $key, 'ma mixin'), $key);
-      $values: append($values, $value);
-    }
-    margin: $values;
-  } @else {
-    // if $keys is a anything else...
-    margin: get($margin-opts, $keys, 'ma mixin');
+@mixin ma($keys...) {
+  $values: ();
+  @each $key in $keys {
+    $value: if(map-has-key($margin-opts, $key), get($margin-opts, $key, 'ma mixin'), $key);
+    $values: append($values, $value);
   }
+  margin: $values;
 }
 
 ////
