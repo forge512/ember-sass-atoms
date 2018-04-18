@@ -113,16 +113,16 @@ $zindex-opts: map-merge($DEFAULT_ZINDEX_OPTS, $zindex-opts);
 // @param {Number} $key - a key in $position-opts
 // @returns a z-index declaration
 ////
-@mixin z-index($key: 'default') {
+@mixin zi($key: 'default') {
   z-index: get($zindex-opts, $key, 'z-index mixin');
 }
 
 ////
-// Mixin: absolute-fill - absolute position and fill the postion: relative parent context
+// Mixin: fill - absolute position and fill the postion: relative parent context
 // @returns a top, right, bottom, and left declarations
 // @credit https://github.com/tachyons-css/tachyons
 ////
-@mixin absolute-fill() {
+@mixin fill {
   position: absolute;
   top: 0;
   right: 0;

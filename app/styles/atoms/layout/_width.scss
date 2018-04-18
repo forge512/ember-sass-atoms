@@ -38,28 +38,28 @@ $width-opts: map-merge($DEFAULT_OPTS, $width-opts);
 // ============================================================================
 
 ////
-// Mixin: width
+// Mixin: w
 // @param {String or Number} $key - a key in $width-opts
 // @returns a width declaration
 ////
-@mixin width($key: 'default') {
+@mixin w($key: 'default') {
   width: if(map-has-key($width-opts, $key), get($width-opts, $key, 'min-width mixin'), $key);
 }
 
 ////
-// Mixin: max-width
+// Mixin: mxw
 // @param {String or Number} $key - a key in $width-opts
 // @returns a max-width declaration
 ////
-@mixin max-width($key: 'default') {
+@mixin mxw($key: 'default') {
   max-width: if(map-has-key($width-opts, $key), get($width-opts, $key, 'min-width mixin'), $key);
 }
 
 ////
-// Mixin: min-width
+// Mixin: mnw
 // @param {String or Number} $key - a key in $width-opts
 // @returns a min-width declaration
 ////
-@mixin min-width($key: 'default') {
+@mixin mnw($key: 'default') {
   min-width: if(map-has-key($width-opts, $key), get($width-opts, $key, 'min-width mixin'), $key);
 }
