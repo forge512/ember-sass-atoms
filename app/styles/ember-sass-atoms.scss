@@ -10,6 +10,7 @@
 @import 'atoms/theming/color-palette';
 
 // Layout Atoms
+@import 'atoms/layout/utils';
 @import 'atoms/layout/aspect-ratio';
 @import 'atoms/layout/box-sizing';
 @import 'atoms/layout/debug';
@@ -20,7 +21,6 @@
 @import 'atoms/layout/padding';
 @import 'atoms/layout/position';
 @import 'atoms/layout/width';
-@import 'atoms/layout/utils';
 
 // Typography Atoms
 @import 'atoms/typography/font-size';

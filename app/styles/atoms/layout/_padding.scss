@@ -6,20 +6,7 @@
 // ============================================================================
 // Variables
 // ============================================================================
-$DEFAULT_OPTS: (
-  'default': initial,
-  'auto': auto,
-  0: 0,
-  1: rem(2),
-  2: rem(4),
-  3: rem(8),
-  4: rem(16),
-  5: rem(24),
-  6: rem(32),
-  7: rem(56),
-  8: rem(64),
-  9: rem(128)
-);
+$DEFAULT_OPTS: map-merge(('default': initial, 'auto': auto), $DEFAULT_SIZES);
 
 // merge in the default options
 $padding-opts: map-merge($DEFAULT_OPTS, $padding-opts);
@@ -30,8 +17,8 @@ $padding-opts: map-merge($DEFAULT_OPTS, $padding-opts);
 
 ////
 // Mixin: pa - sets paddings for all directions
-// @param {List or Number} $keys - one or more keys in $padding-opts
-// @examples `@include pa((1,2,2,1))`, `@include pa(1)`
+// @param {List} $keys - one or more keys in $padding-opts
+// @examples `@include pa(8,8,4,8)`, `@include pa(4)`
 // @returns a padding declaration
 ////
 @mixin pa($keys: 0) {
@@ -53,7 +40,7 @@ $padding-opts: map-merge($DEFAULT_OPTS, $padding-opts);
 // Mixin: pv - sets paddings for vertical directions
 // @param {Number} $top - a key in $padding-opts (defaults to 0)
 // @param {Number} $bottom - a key in $padding-opts (defaults to value of $top)
-// @examples `@include pv(1,2)`, `@include pv(1)`
+// @examples `@include pv(4,2)`, `@include pv(24)`
 // @returns padding-top and padding-bottom declarations
 ////
 @mixin pv($top: 0, $bottom: null) {
@@ -77,7 +64,7 @@ $padding-opts: map-merge($DEFAULT_OPTS, $padding-opts);
 // Mixin: ph - sets paddings for horizontal directions
 // @param {Number} $left - a key in $padding-opts (defaults to 0)
 // @param {Number} $right - a key in $padding-opts (defaults to value of $left)
-// @examples `@include ph(1,2)`, `@include ph(1)`
+// @examples `@include ph(2,4)`, `@include ph(16)`
 // @returns padding-left and padding-right declarations
 ////
 @mixin ph($left: 0, $right: null) {

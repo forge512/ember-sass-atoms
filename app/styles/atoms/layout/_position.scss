@@ -13,21 +13,16 @@ $DEFAULT_POSITION_OPTS: (
   'absolute': absolute,
   'fixed': fixed
 );
-$DEFAULT_COORDINATE_OPTS: (
-  'default': auto,
-  'auto': auto,
-  0: 0,
-  1: rem(8),
-  2: rem(16),
-  3: rem(24),
-  4: rem(32),
-  5: rem(56),
-  6: rem(64),
-  7: rem(128),
-  8: rem(256),
-  '25%': 25%,
-  '33%': calc(100% / 3),
-  '50%': 50%
+// prettier-ignore
+$DEFAULT_COORDINATE_OPTS: map-merge(
+  (
+    'default': auto,
+    'auto': auto,
+    '25%': 25%,
+    '33%': calc(100% / 3),
+    '50%': 50%
+  ),
+  $DEFAULT_SIZES
 );
 $DEFAULT_ZINDEX_OPTS: (
   'default': unset,

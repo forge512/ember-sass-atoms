@@ -6,20 +6,7 @@
 // ============================================================================
 // Variables
 // ============================================================================
-$DEFAULT_OPTS: (
-  'default': initial,
-  'auto': auto,
-  0: 0,
-  1: rem(2),
-  2: rem(4),
-  3: rem(8),
-  4: rem(16),
-  5: rem(24),
-  6: rem(32),
-  7: rem(56),
-  8: rem(64),
-  9: rem(128)
-);
+$DEFAULT_OPTS: map-merge(('default': initial, 'auto': auto), $DEFAULT_SIZES);
 
 // merge in the default options
 $margin-opts: map-merge($DEFAULT_OPTS, $margin-opts);
@@ -31,7 +18,7 @@ $margin-opts: map-merge($DEFAULT_OPTS, $margin-opts);
 ////
 // Mixin: ma - sets margin for all directions
 // @param {List or Number} $keys - one or more keys in $margin-opts
-// @examples `@include ma((1,2,2,1))`, `@include ma(1)`
+// @examples `@include ma(2,2,16)`, `@include ma(128)`
 // @returns a margin declaration
 ////
 @mixin ma($keys: 0) {
@@ -53,7 +40,7 @@ $margin-opts: map-merge($DEFAULT_OPTS, $margin-opts);
 // Mixin: mv - sets margins for vertical directions
 // @param {Number} $top - a key in $margin-opts (defaults to 0)
 // @param {Number} $bottom - a key in $margin-opts (defaults to value of $top)
-// @examples `@include mv(1,2)`, `@include mv(1)`
+// @examples `@include mv(4,2)`, `@include mv(4)`
 // @returns margin-top and margin-bottom declarations
 ////
 @mixin mv($top: 0, $bottom: null) {
@@ -73,7 +60,7 @@ $margin-opts: map-merge($DEFAULT_OPTS, $margin-opts);
 // Mixin: mh - sets margins for horizontal directions
 // @param {Number} $left - a key in $margin-opts (defaults to 0)
 // @param {Number} $right - a key in $margin-opts (defaults to value of $left)
-// @examples `@include mh(1,2)`, `@include mh(1)`
+// @examples `@include mh(8,12)`, `@include mh(20)`
 // @returns margin-left and margin-right declarations
 ////
 @mixin mh($left: 0, $right: null) {

@@ -1,7 +1,30 @@
 ////
-// Layout mixins that don't fit anywhere else
+// Layout variables and mixins that don't fit anywhere else
 // @group Atoms/Layout
 ////
+
+////
+// Variable: $DEFAULT_SIZES - map of numerical sizes used in
+// margin, padding, height, width, and postion-coordinates mixins
+////
+$DEFAULT_SIZES: (
+  0: 0,
+  2: rem(2),
+  4: rem(4),
+  6: rem(6),
+  8: rem(8),
+  12: rem(12),
+  16: rem(16),
+  20: rem(20),
+  24: rem(24),
+  32: rem(32),
+  40: rem(40),
+  48: rem(48),
+  56: rem(56),
+  64: rem(64),
+  128: rem(128),
+  256: rem(256)
+);
 
 ////
 // Mixin: squish - removes all margin & padding

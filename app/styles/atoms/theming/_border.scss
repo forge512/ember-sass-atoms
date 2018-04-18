@@ -12,18 +12,19 @@ $DEFAULT_BORDER_WIDTH_OPTS: (
   0: 0,
   1: rem(1),
   2: rem(2),
-  3: rem(4),
-  4: rem(8),
-  5: rem(16)
+  4: rem(4),
+  8: rem(8),
+  16: rem(16)
 );
 $DEFAULT_BORDER_RADIUS_OPTS: (
   'default': 0,
   0: 0,
-  1: rem(2),
-  2: rem(4),
-  3: rem(8),
-  4: rem(16),
-  100: 100%
+  2: rem(2),
+  4: rem(4),
+  8: rem(8),
+  16: rem(16),
+  '50%': 50%,
+  '100%': 100%
 );
 $DEFAULT_BORDER_STYLE_OPTS: (
   'default': solid,
