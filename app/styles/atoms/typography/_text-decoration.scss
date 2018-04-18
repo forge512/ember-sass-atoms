@@ -8,12 +8,10 @@
 // ============================================================================
 $DEFAULT_OPTS: (
   'default': none,
+  'none': none,
   'underline': underline,
   'strike': line-through
 );
-
-// Allow consumers to define their own options
-$text-decoration-opts: () !default;
 
 // merge in the default options
 $text-decoration-opts: map-merge($DEFAULT_OPTS, $text-decoration-opts);

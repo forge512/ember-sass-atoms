@@ -21,9 +21,6 @@ $DEFAULT_OPTS: (
   9: 900
 );
 
-// Allow consumers to define their own options
-$font-weight-opts: () !default;
-
 // merge in the default options
 $font-weight-opts: map-merge($DEFAULT_OPTS, $font-weight-opts);
 

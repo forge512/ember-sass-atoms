@@ -20,10 +20,6 @@ $DEFAULT_CLEAR_OPTS: (
   'both': both
 );
 
-// Allow consumers to define their own options
-$float-opts: () !default;
-$clear-opts: () !default;
-
 // merge in the default options
 $float-opts: map-merge($DEFAULT_FLOAT-OPTS, $float-opts);
 $clear-opts: map-merge($DEFAULT_CLEAR_OPTS, $clear-opts);

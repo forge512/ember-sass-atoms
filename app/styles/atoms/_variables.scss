@@ -1,0 +1,119 @@
+////
+// Overridable Variables
+////
+
+// Sets an absolute size used in calculating font size
+// and other measurements through the library
+$em-base: 16px !default;
+
+// ============================================================================
+// Layout
+// ============================================================================
+$aspect-ratios: () !default;
+
+$height-opts: () !default;
+$width-opts: () !default;
+
+$display-opts: () !default;
+
+$float-opts: () !default;
+$clear-opts: () !default;
+
+$margin-opts: () !default;
+$padding-opts: () !default;
+
+$position-opts: () !default;
+$coordinate-opts: () !default;
+$zindex-opts: () !default;
+
+// ============================================================================
+// Typography
+// ============================================================================
+$font-size-opts: () !default;
+$font-weight-opts: () !default;
+$kerning-scale: () !default;
+$line-height-opts: () !default;
+
+$text-align-opts: () !default;
+$text-decoration-opts: () !default;
+$text-transform-opts: () !default;
+
+$vertical-align-opts: () !default;
+$white-space-opts: () !default;
+$word-break-opts: () !default;
+
+////
+// $typesets - Typesets expect the following key/value pairs
+// - size
+// - weight
+// - line-height
+// - kerning (letter-spacing)
+// - color (optional)
+//
+// @example
+// $my-typeset: (
+//   'color': color('black', 'base'),
+//   'size': rem(14),
+//   'weight': 'normal',
+//   'line-height': 1.1em,
+//   'kerning': 'normal'
+// )
+// $typesets: map-merge($typesets, ('my-typeset': $my-typeset));
+//
+// $my-set can now be accessed by calling: `@include typeset('my-typeset')`
+////
+$typesets: () !default;
+
+// ============================================================================
+// Theme
+// ============================================================================
+$backgrounds: () !default;
+$background-position-opts: () !default;
+$background-size-opts: () !default;
+$borders: () !default;
+$border-radius-opts: () !default;
+$border-style-opts: () !default;
+$border-width-opts: () !default;
+$transition-opts: () !default;
+
+////
+// $font-families
+//
+// @example
+// $my-font-family: ('PT Sans', arial, sans-serif)
+// $font-families: map-merge($color-palettes, ('my-font-family': $my-font-family));
+//
+// $my-font-familiy can now be accessed by calling: `@include ff('my-font-family')`
+////
+$font-families: () !default;
+
+// Set the theme defaults
+$primary-font-family: 'roboto' !default;
+$accent-font-family: 'georgia' !default;
+$code-font-family: 'monospace' !default;
+
+////
+// Color Palettes
+//
+// @example
+// $my-palette: (
+//  'base': #d0d0d0,
+//  'color-name-1': #333333,
+//  'color-name-2': color('red', 'lighten-1'),
+//  'gradient-name-1': linear-gradient(130deg, yellow, red)
+//  'text-default': #202020
+// )
+// $color-palettes: map-merge($color-palettes, ('my-palette': $my-palette));
+//
+// color values in $my-palette can now be accessed by calling:
+// `color('my-palette', 'color-name-1')` to retrieve a specific shade
+// `color('my-palette')` to retrieve the $default-palette-shade
+////
+$color-palettes: () !default;
+
+// Set the theme palettes and default palette shade
+$primary-palette: 'blue-grey' !default;
+$accent-palette: 'amber' !default;
+$error-palette: 'red' !default;
+$success-palette: 'green' !default;
+$default-palette-shade: 'base' !default;

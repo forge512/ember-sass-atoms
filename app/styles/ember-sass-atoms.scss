@@ -2,8 +2,11 @@
 // All the things
 ////
 
-// Multi-use utility functions & mixins
+// Overridable Variables, Multi-use utility functions
+@import 'atoms/variables';
 @import 'atoms/utils';
+
+// Color palettes
 @import 'atoms/theming/color-palette';
 
 // Layout Atoms

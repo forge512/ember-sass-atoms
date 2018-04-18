@@ -21,9 +21,6 @@ $DEFAULT_OPTS: (
   'table-column-group': table-column-group
 );
 
-// Allow consumers to define their own options
-$display-opts: () !default;
-
 // merge in the default options
 $display-opts: map-merge($DEFAULT_OPTS, $display-opts);
 

@@ -7,6 +7,6 @@
 // Mixin: squish - removes all margin & padding
 ////
 @mixin squish {
-  @include pa('none');
-  @include ma('none');
+  padding: 0;
+  margin: 0;
 }

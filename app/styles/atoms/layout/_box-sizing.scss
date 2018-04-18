@@ -5,12 +5,12 @@
 
 ////
 // Mixin: box-model - sets the box-sizing on an element
-// @param {String} $type - either `border-box` or 'content-box'
+// @param {String} $type - either `border` or 'content'
 ////
 @mixin box-model($type) {
   // prettier-ignore
-  @if index(('border-box', 'content-box'), $type) {
-    box-sizing: $type;
+  @if index(('border', 'content'), $type) {
+    box-sizing: if($type == 'border', border-box, content-box);
     &:before, &:after {
       box-sizing: inherit;
     }

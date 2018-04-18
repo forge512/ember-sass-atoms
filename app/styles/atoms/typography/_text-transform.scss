@@ -13,9 +13,6 @@ $DEFAULT_OPTS: (
   'capital': capitalize
 );
 
-// Allow consumers to define their own options
-$text-transform-opts: () !default;
-
 // merge in the default options
 $text-transform-opts: map-merge($DEFAULT_OPTS, $text-transform-opts);
 

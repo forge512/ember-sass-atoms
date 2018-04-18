@@ -14,9 +14,6 @@ $DEFAULT_OPTS: (
   'justify': justify
 );
 
-// Allow consumers to define their own options
-$text-align-opts: () !default;
-
 // merge in the default options
 $text-align-opts: map-merge($DEFAULT_OPTS, $text-align-opts);
 

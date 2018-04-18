@@ -5,7 +5,7 @@
 
 // Map of the Material Design typesets
 // @link https://material.io/guidelines/style/typography.html
-$MATERIAL_TYPESETS: (
+$DEFAULT_TYPESETS: (
   'display4':
     (
       'color': color('black', 'lighten-1'),
@@ -96,30 +96,8 @@ $MATERIAL_TYPESETS: (
     )
 );
 
-////
-// $typesets - Map of typeset options
-// Typesets require the following key/value pairs
-// - size
-// - weight
-// - line-height
-// - kerning (letter-spacing)
-// Optionally you can set a color key/value as well
-// @example Define and add a typeset to $typesets
-// $my-typeset: (
-//   'color': color('black', 'base'),
-//   'size': rem(14),
-//   'weight': 'normal',
-//   'line-height': 1.1em,
-//   'kerning': 'normal'
-// )
-// $typesets: map-merge($typesets, ('my-typeset': $my-typeset));
-// $my-set can now be accessed by calling:
-// `@include typeset('my-typeset')`
-////
-$typesets: () !default;
-
 // merge in the default typesets
-$typesets: map-merge($MATERIAL_TYPESETS, $typesets);
+$typesets: map-merge($DEFAULT_TYPESETS, $typesets);
 
 // =================================================================================================
 // Mixins

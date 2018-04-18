@@ -17,10 +17,6 @@ $DEFAULT_WORD_BREAK_OPTS: (
   'keep-all': keep-all
 );
 
-// Allow consumers to define their own options
-$white-space-opts: () !default;
-$word-break-opts: () !default;
-
 // merge in the default options
 $white-space-opts: map-merge($DEFAULT_WHITESPACE_OPTS, $white-space-opts);
 $word-break-opts: map-merge($DEFAULT_WORD_BREAK_OPTS, $word-break-opts);

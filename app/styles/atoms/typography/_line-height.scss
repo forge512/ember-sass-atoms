@@ -17,9 +17,6 @@ $DEFAULT_OPTS: (
   7: 1.75em
 );
 
-// Allow consumers to define their own options
-$line-height-opts: () !default;
-
 // merge in the default options
 $line-height-opts: map-merge($DEFAULT_OPTS, $line-height-opts);
 

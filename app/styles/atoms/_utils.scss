@@ -28,12 +28,12 @@
 ////
 // Convert pixels to ems
 // @param {Number} $pxVal - (Required) the desired value in pixels
-// @param {Number} $base - (Optional) the base value in pixels, defaults to $EM_BASE
+// @param {Number} $base - (Optional) the base value in pixels, defaults to $em-base
 // @return {Number (in ems)}
-// @example em(12) => 0.75em (when $EM_BASE is 16px)
+// @example em(12) => 0.75em (when $em-base is 16px)
 // @example em(12, 24) => 0.5em
 ////
-@function em($pxVal, $base: $EM_BASE) {
+@function em($pxVal, $base: $em-base) {
   @if not unitless($pxVal) {
     $pxVal: stripUnits($pxVal);
   }
@@ -44,13 +44,13 @@
 }
 
 ////
-// Convert pixels to rems using $EM_BASE
+// Convert pixels to rems using $em-base
 // @param {Number} $pxVal - (Required) the desired value in pixels
-// @example em(12) => 0.75rem (when $EM_BASE is 16px)
+// @example em(12) => 0.75rem (when $em-base is 16px)
 // Assumes $em-base is the font-size of <html>
 ////
 @function rem($pxVal) {
-  $base: $EM_BASE;
+  $base: $em-base;
   @if not unitless($pxVal) {
     $pxVal: stripUnits($pxVal);
   }

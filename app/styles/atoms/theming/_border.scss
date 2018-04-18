@@ -28,7 +28,7 @@ $DEFAULT_BORDER_RADIUS_OPTS: (
 $DEFAULT_BORDER_STYLE_OPTS: (
   'default': solid,
   'solid': solid,
-  'dottend': dotted,
+  'dotted': dotted,
   'dashed': dashed
 );
 $DEFAULT_BORDERS: (
@@ -41,12 +41,6 @@ $DEFAULT_BORDERS: (
   'theme-error': 1px solid color('error', 'darken-2'),
   'theme-success': 1px solid color('success', 'darken-2')
 );
-
-// Allow consumers to define their own options
-$border-width-opts: () !default;
-$border-radius-opts: () !default;
-$border-style-opts: () !default;
-$borders: () !default;
 
 // merge in the default options
 $border-width-opts: map-merge($DEFAULT_BORDER_WIDTH_OPTS, $border-width-opts);

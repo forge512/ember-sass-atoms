@@ -28,11 +28,6 @@ $DEFAULT_BACKGROUNDS: (
   'theme-primary': color('primary', 'lighten-5')
 );
 
-// Allow consumers to define their own options
-$background-position-opts: () !default;
-$background-size-opts: () !default;
-$backgrounds: () !default;
-
 // merge in the default options
 $background-position-opts: map-merge($DEFAULT_BACKGROUND_POSITION_OPTS, $background-position-opts);
 $background-size-opts: map-merge($DEFAULT_BACKGROUND_SIZE_OPTS, $background-size-opts);

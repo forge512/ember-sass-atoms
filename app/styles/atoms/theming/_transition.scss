@@ -16,9 +16,6 @@ $DEFAULT_OPTS: (
   'materialLeave': ('duration': 0.3s, 'timingFunc': cubic-bezier(0.4, 0, 1, 1))
 );
 
-// Allow consumers to define their own options
-$transition-opts: () !default;
-
 // merge in the default options
 $transition-opts: map-merge($DEFAULT_OPTS, $transition-opts);
 
@@ -32,7 +29,7 @@ $transition-opts: map-merge($DEFAULT_OPTS, $transition-opts);
 // @param {String} $transition - one of the $TRANSITION_SCALE map values
 // @returns a transition declaration
 ////
-@mixin transition($property: 'all', $transition: 'swiftEaseInOut') {
+@mixin transition($property: all, $transition: 'swiftEaseInOut') {
   $opts: get($transition-opts, $transition, 'transition mixin');
   transition: $property get($opts, 'duration') get($opts, 'timingFunc');
 }

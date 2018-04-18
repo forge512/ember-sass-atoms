@@ -17,23 +17,9 @@ $DEFAUlT_FAMILIES: (
   'times': (times, 'times new roman', serif)
 );
 
-////
-// $font-families - Map of font-family lists
-// @example Define and add a font-family to $font-families
-// $my-font-family: ('PT Sans', arial, sans-serif)
-// $font-families: map-merge($color-palettes, ('my-font-family': $my-font-family));
-// $my-font-familiy can now be accessed by calling:
-// `@include ff('my-font-family')`
-////
-$font-families: () !default;
-
-// set the theme defaults
-$primary-font-family: 'roboto' !default;
-$accent-font-family: 'georgia' !default;
-$code-font-family: 'monospace' !default;
-
 // merge in the default font-families
 $font-families: map-merge($DEFAUlT_FAMILIES, $font-families);
+// merge in the theme font-families
 $font-families: map-merge(
   (
     'default': get($DEFAUlT_FAMILIES, 'sans-serif'),

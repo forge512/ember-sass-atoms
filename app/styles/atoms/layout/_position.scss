@@ -30,7 +30,7 @@ $DEFAULT_COORDINATE_OPTS: (
   '50%': 50%
 );
 $DEFAULT_ZINDEX_OPTS: (
-  'default': 0,
+  'default': unset,
   'auto': auto,
   'initial': initial,
   'inherit': inherit,
@@ -45,11 +45,6 @@ $DEFAULT_ZINDEX_OPTS: (
   9999: 9999,
   'max': 2147483647
 );
-
-// Allow consumers to define their own options
-$position-opts: () !default;
-$coordinate-opts: () !default;
-$zindex-opts: () !default;
 
 // merge in the default options
 $position-opts: map-merge($DEFAULT_POSITION_OPTS, $position-opts);

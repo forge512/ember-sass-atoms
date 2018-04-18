@@ -36,9 +36,6 @@ $DEFAULT_OPTS: (
   'two-thirds': calc(100% / 1.5)
 );
 
-// Allow consumers to define their own options
-$width-opts: () !default;
-
 // merge in the default options
 $width-opts: map-merge($DEFAULT_OPTS, $aspect-ratios);
 

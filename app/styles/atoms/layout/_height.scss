@@ -28,9 +28,6 @@ $DEFAULT_OPTS: (
   'vh100': 100vh
 );
 
-// Allow consumers to define their own options
-$height-opts: () !default;
-
 // merge in the default options
 $height-opts: map-merge($DEFAULT_OPTS, $height-opts);
 

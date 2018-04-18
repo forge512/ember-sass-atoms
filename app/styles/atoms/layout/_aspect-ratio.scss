@@ -39,9 +39,6 @@ $DEFAULT_OPTS: (
   'square': 100%
 );
 
-// Allow consumers to define their own options
-$aspect-ratios: () !default;
-
 // merge in the default options
 $aspect-ratios: map-merge($DEFAULT_OPTS, $aspect-ratios);
 

@@ -16,9 +16,6 @@ $DEFAULT_OPTS: (
   6: 0.02em
 );
 
-// Allow consumers to define their own options
-$kerning-scale: () !default;
-
 // merge in the default options
 $kerning-scale: map-merge($DEFAULT_OPTS, $kerning-scale);
 

@@ -21,9 +21,6 @@ $DEFAULT_OPTS: (
   9: rem(128)
 );
 
-// Allow consumers to define their own options
-$margin-opts: () !default;
-
 // merge in the default options
 $margin-opts: map-merge($DEFAULT_OPTS, $margin-opts);
 

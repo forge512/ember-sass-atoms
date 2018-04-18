@@ -20,9 +20,6 @@ $DEFAULT_OPTS: (
   10: rem(112)
 );
 
-// Allow consumers to define their own options
-$font-size-opts: () !default;
-
 // merge in the default options
 $font-size-opts: map-merge($DEFAULT_OPTS, $font-size-opts);
 
